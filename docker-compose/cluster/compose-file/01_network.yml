@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 #创建一个网络
 networks:
@@ -8,3 +8,10 @@ networks:
       driver: default
       config:
         - subnet: ${IP_ADDR_PREFIX}.0/16
+
+x-hosts:
+  &default-hosts
+  extra_hosts:
+    - rabbit-1:${IP_ADDR_PREFIX}.41
+    - rabbit-2:${IP_ADDR_PREFIX}.42
+    - rabbit-3:${IP_ADDR_PREFIX}.43

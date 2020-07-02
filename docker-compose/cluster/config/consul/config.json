@@ -16,9 +16,9 @@
   },
   "rejoin_after_leave": true,
   "retry_join": [
-    "172.28.0.11",
-    "172.28.0.12",
-    "172.28.0.13"
+    "consul-1.shit-code.com",
+    "consul-2.shit-code.com",
+    "consul-3.shit-code.com"
   ],
   "retry_interval": "5s",
   "reconnect_timeout": "72h"

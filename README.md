@@ -10,6 +10,8 @@
 $ pip3 install docker-compose
 ```
 
+docker compose file [官方文档](https://docs.docker.com/compose/compose-file/)
+
 版本：
 ```shell script
 $ docker -v

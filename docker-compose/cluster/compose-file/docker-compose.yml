@@ -1,9 +1,28 @@
 version: '3.8'
 
+x-hosts:
+  &default-hosts
+  extra_hosts:
+    - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+    - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
+    - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
+
+
+#创建一个网络
+networks:
+  cluster-network:
+    name: cluster-network
+    ipam:
+      driver: default
+      config:
+        - subnet: ${IP_ADDR_PREFIX}.0/16
+
+
 #consul集群配置
 services:
   consul-1:
     &consul
+    <<: *default-hosts
     container_name: consul-1
     image: ${CONSUL_IMAGE}
     hostname: consul-1.shit-code.com
@@ -11,10 +30,6 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.11
     command: ["agent", "-data-dir", "/consul/data", "-config-dir", "/consul/config", "-ui"]
-#    extra_hosts:
-#      - consul-1:${IP_ADDR_PREFIX}.11
-#      - consul-2:${IP_ADDR_PREFIX}.12
-#      - consul-3:${IP_ADDR_PREFIX}.13
     volumes:
       - ${DOCKER_VOLUME}/consul/node1:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json

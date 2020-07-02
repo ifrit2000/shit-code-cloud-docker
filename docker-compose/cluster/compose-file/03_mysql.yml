@@ -1,39 +1,65 @@
-version: '3.7'
+version: '3.8'
 
 #mysql集群
 services:
-  mysql_master:
+  mysql-master-1:
     &mysql
-    container_name: mysql_master
+    container_name: mysql-master-1
     image: ${MYSQL_IMAGE}
-    hostname: mysql_master
+    hostname: mysql-master-1.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.21
     environment:
       #      - MYSQL_ROOT_PASSWORD=123456
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
-    extra_hosts:
-      - mysql_master:${IP_ADDR_PREFIX}.21
-      - mysql_slave:${IP_ADDR_PREFIX}.22
     volumes:
       - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ${DOCKER_CONFIG}/mysql/master.cnf:/etc/mysql/conf.d/master.cnf
-      - ${DOCKER_VOLUME}/mysql/master:/var/lib/mysql
-  mysql_slave:
+      - ${DOCKER_CONFIG}/mysql/server1.cnf:/etc/mysql/conf.d/server1.cnf
+      - ${DOCKER_VOLUME}/mysql/master1:/var/lib/mysql
+  mysql-master-2:
     <<: *mysql
-    container_name: mysql_slave
-    hostname: mysql_slave
-    depends_on:
-      - mysql_master
+    container_name: mysql-master-2
+    hostname: mysql-master-2.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.22
+    environment:
+      #      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
     volumes:
       - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ${DOCKER_CONFIG}/mysql/slave.cnf:/etc/mysql/conf.d/slave.cnf
-      - ${DOCKER_VOLUME}/mysql/slave:/var/lib/mysql
+      - ${DOCKER_CONFIG}/mysql/master.cnf:/etc/mysql/conf.d/master.cnf
+      - ${DOCKER_CONFIG}/mysql/server2.cnf:/etc/mysql/conf.d/server2.cnf
+      - ${DOCKER_VOLUME}/mysql/master2:/var/lib/mysql
+  mysql-slave-1:
+    <<: *mysql
+    container_name: mysql-slave-1
+    hostname: mysql-slave-1.shit-code.com
+    depends_on:
+      - mysql-master-1
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.23
+    volumes:
+      - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ${DOCKER_CONFIG}/mysql/server3.cnf:/etc/mysql/conf.d/server3.cnf
+      - ${DOCKER_VOLUME}/mysql/slave1:/var/lib/mysql
 
+  mysql-slave-2:
+    <<: *mysql
+    container_name: mysql-slave-2
+    hostname: mysql-slave-2.shit-code.com
+    depends_on:
+      - mysql-master-2
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.24
+    volumes:
+      - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ${DOCKER_CONFIG}/mysql/server4.cnf:/etc/mysql/conf.d/server4.cnf
+      - ${DOCKER_VOLUME}/mysql/slave2:/var/lib/mysql
 #  eithi9ram2Saeji5Nai7miShohzop2Uc
 #  nav9ahdong5NohNgoopooSh4eideijoo
 # sudo grep 'GENERATED ROOT PASSWORD' /var/lib/mysql/mysql_master.log

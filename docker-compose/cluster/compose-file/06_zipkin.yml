@@ -1,17 +1,17 @@
-version: '3.7'
+version: '3.8'
 
 services:
   zipkin_1:
-    container_name: zipkin_1
+    container_name: zipkin-1
     image: ${ZIPKIN_IMAGE}
-    hostname: zipkin_1
+    hostname: zipkin-1.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
   zipkin_2:
-    container_name: zipkin_2
+    container_name: zipkin-2
     image: ${ZIPKIN_IMAGE}
-    hostname: zipkin_2
+    hostname: zipkin-2.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.52
