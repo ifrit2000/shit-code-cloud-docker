@@ -1,0 +1,85 @@
+version: '3.7'
+
+#创建一个网络
+networks:
+  cluster-network:
+    name: cluster-network
+    ipam:
+      driver: default
+      config:
+        - subnet: ${IP_ADDR_PREFIX}.0/16
+
+services:
+  nginx:
+    container_name: nginx
+    image: ${NGINX_IMAGE}
+    hostname: nginx
+    ports:
+      - 80:80
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.92
+    volumes:
+      - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
+  consul:
+    container_name: consul
+    image: ${CONSUL_IMAGE}
+    hostname: consul
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.11
+    command: ["agent","-server", "-data-dir", "/consul/data", "-config-dir", "/consul/config", "-ui","-bootstrap-expect","1","-client","0.0.0.0"]
+    ports:
+      - 8500:8500
+    volumes:
+      - ${DOCKER_VOLUME}/consul:/consul/data
+  redis:
+    container_name: redis
+    image: ${REDIS_IMAGE}
+    hostname: redis
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.31
+    #    command: ["/usr/local/etc/redis/redis.conf"]
+    ports:
+      - 6379:6379
+    volumes:
+      - ${DOCKER_VOLUME}/redis:/data
+  #      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
+  mysql:
+    container_name: mysql
+    image: ${MYSQL_IMAGE}
+    hostname: mysql
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.21
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+      - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ${DOCKER_VOLUME}/mysql:/var/lib/mysql
+  rabbit:
+    container_name: rabbit
+    image: ${RABBITMQ_IMAGE}
+    hostname: rabbit
+    ports:
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 15671:15671
+      - 15672:15672
+      - 25672:25672
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.41
+  zipkin:
+    container_name: zipkin
+    image: ${ZIPKIN_IMAGE}
+    hostname: zipkin
+    ports:
+      - 9411:9411
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.51

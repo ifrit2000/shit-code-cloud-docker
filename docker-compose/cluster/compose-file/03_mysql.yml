@@ -1,0 +1,49 @@
+version: '3.7'
+
+#mysql集群
+services:
+  mysql_master:
+    &mysql
+    container_name: mysql_master
+    image: ${MYSQL_IMAGE}
+    hostname: mysql_master
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.21
+    environment:
+      #      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    extra_hosts:
+      - mysql_master:${IP_ADDR_PREFIX}.21
+      - mysql_slave:${IP_ADDR_PREFIX}.22
+    volumes:
+      - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ${DOCKER_CONFIG}/mysql/master.cnf:/etc/mysql/conf.d/master.cnf
+      - ${DOCKER_VOLUME}/mysql/master:/var/lib/mysql
+  mysql_slave:
+    <<: *mysql
+    container_name: mysql_slave
+    hostname: mysql_slave
+    depends_on:
+      - mysql_master
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.22
+    volumes:
+      - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ${DOCKER_CONFIG}/mysql/slave.cnf:/etc/mysql/conf.d/slave.cnf
+      - ${DOCKER_VOLUME}/mysql/slave:/var/lib/mysql
+
+#  eithi9ram2Saeji5Nai7miShohzop2Uc
+#  nav9ahdong5NohNgoopooSh4eideijoo
+# sudo grep 'GENERATED ROOT PASSWORD' /var/lib/mysql/mysql_master.log
+# master
+#  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';
+# CREATE USER 'slave'@'172.28.0.22' IDENTIFIED WITH mysql_native_password BY 'xxxx';
+# GRANT REPLICATION SLAVE ON *.* TO 'slave'@'172.28.0.22';
+# CREATE USER 'username'@'host' IDENTIFIED WITH mysql_native_password BY 'password';
+# GRANT Create,drop,insert,update,delete ON *.* TO 'username'@'host';
+# show master status
+
+# slave
+# #CHANGE MASTER TO MASTER_HOST='172.28.0.11',MASTER_USER='slave',MASTER_PASSWORD='xxx',MASTER_LOG_FILE='master_binlog.000001',MASTER_LOG_POS=1332;

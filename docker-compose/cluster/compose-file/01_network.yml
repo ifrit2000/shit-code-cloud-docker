@@ -1,0 +1,10 @@
+version: '3.7'
+
+#创建一个网络
+networks:
+  cluster-network:
+    name: cluster-network
+    ipam:
+      driver: default
+      config:
+        - subnet: ${IP_ADDR_PREFIX}.0/16

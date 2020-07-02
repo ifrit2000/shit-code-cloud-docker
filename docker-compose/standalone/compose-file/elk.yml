@@ -1,0 +1,43 @@
+version: '3.7'
+
+networks:
+  cluster-network:
+    external: true
+
+services:
+  logstash:
+    container_name: logstash
+    image: ${LOGSTASH_IMAGE}
+    hostname: logstash
+    extra_hosts:
+      - elasticsearch:${IP_ADDR_PREFIX}.71
+      - rabbitmq:${IP_ADDR_PREFIX}.41
+    command: ["-f","/config/rabbitmq.conf"]
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.61
+    volumes:
+      - ${DOCKER_CONFIG}/logstash/rabbitmq.conf:/config/rabbitmq.conf
+  elasticsearch:
+    container_name: elasticsearch
+    image: ${ELASTICSEARCH_IMAGE}
+    hostname: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.71
+  kibana:
+    container_name: kibana
+    image: ${KIBANA_IMAGE}
+    hostname: kibana
+    extra_hosts:
+      - elasticsearch:${IP_ADDR_PREFIX}.71
+    ports:
+      - 5601:5601
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.81

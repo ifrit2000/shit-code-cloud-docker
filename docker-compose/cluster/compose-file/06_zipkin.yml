@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  zipkin_1:
+    container_name: zipkin_1
+    image: ${ZIPKIN_IMAGE}
+    hostname: zipkin_1
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.51
+  zipkin_2:
+    container_name: zipkin_2
+    image: ${ZIPKIN_IMAGE}
+    hostname: zipkin_2
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.52

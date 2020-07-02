@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  cluster-network:
+    external: true
+
+
+services:
+  #  git2consul:
+  #    container_name: git2consul
+  #    image: cimpress/git2consul
+  #    hostname: git2consul
+  #    command: ['--endpoint','172.28.0.11','--port','8500','--config-file','/etc/git2consul.d/git2consul.json']
+  #    networks:
+  #      cluster-network:
+  #        ipv4_address: ${IP_ADDR_PREFIX}.99
+  #    volumes:
+  #      - ${DOCKER_CONFIG}/git2consul/git2consul.json:/etc/git2consul.d/git2consul.json
+  git2consul_new:
+    container_name: git2consul_new
+    image: trendyoltech/git2consul-go
+    hostname: git2consul_new
+    command: ['git2consul','-config','/etc/git2consul.json']
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.101
+    volumes:
+      - ${DOCKER_CONFIG}/git2consul/new.json:/etc/git2consul.json

@@ -1,0 +1,16 @@
+version: '3.7'
+
+networks:
+  cluster-network:
+    external: true
+
+services:
+  vault:
+    container_name: vault
+    image: ${VAULT_IMAGE}
+    hostname: vault
+    ports:
+    - 8200:8200
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.91
