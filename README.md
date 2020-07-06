@@ -28,3 +28,9 @@ $ docker-compose up
 
 ## 搭建集群
 
+
+
+
+容器不退出
+docker run -dit centos /bin/bash
+
