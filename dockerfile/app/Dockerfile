@@ -45,7 +45,7 @@ RUN set -eux && \
 # with /consul/config as the configuration directory so you can add additional
 # config files in that location.
 RUN mkdir -p /consul/data && \
-    mkdir -p /consul/config && \
+    mkdir -p /consul/config
 #    chown -R consul:consul /consul
 
 # set up nsswitch.conf for Go's "netgo" implementation which is used by Consul,
