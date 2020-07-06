@@ -18,5 +18,9 @@ RUN mkdir -p /app/config &&\
     rm -rf /tmp/build/ &&\
     rm -rf ~/.gradle &&\
 
+VOLUME /app/config
+
+EXPOSE 8080
+
 ENTRYPOINT ["java","-jar","${APP_NAME}.jar"]
 
