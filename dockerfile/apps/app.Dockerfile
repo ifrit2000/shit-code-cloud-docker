@@ -4,7 +4,9 @@ ARG APP_NAME=infrastructure-admin
 
 FROM openjdk:11
 MAINTAINER Anthony
-
+ARG GRADLE_VERSION
+ARG GIT_REPO
+ARG APP_NAME
 
 RUN mkdir -p /tmp/build &&\
     cd /tmp/build &&\
@@ -16,7 +18,8 @@ RUN mkdir -p /tmp/build &&\
 
 
 FROM cd871127/container:java11.consul1.8.0
-
+ARG GIT_REPO
+ARG APP_NAME
 RUN mkdir -p /app/config &&\
     mkdir -p /app/data &&\
 WORKDIR /app
