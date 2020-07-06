@@ -11,7 +11,7 @@ RUN mkdir -p /app/config &&\
     cd /tmp/build &&\
     git clone https://github.com/cd871127/${GIT_REPO}.git &&\
     wget ${GRADLE_RELEASE} &&\
-    unzip gradle-$GRADLE_VERSION-bin.zip
+    unzip gradle-$GRADLE_VERSION-bin.zip &&\
     cd ${GIT_REPO} &&\
     /tmp/build/gradle-${GRADLE_VERSION}/bin/gradle ${APP_NAME}:bootJar &&\
     cp ${APP_NAME}/build/libs/${APP_NAME}.jar /app
