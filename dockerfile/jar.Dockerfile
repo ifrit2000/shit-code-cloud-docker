@@ -16,7 +16,7 @@ RUN mkdir -p /app/config &&\
     /tmp/build/gradle-${GRADLE_VERSION}/bin/gradle ${APP_NAME}:bootJar &&\
     cp ${APP_NAME}/build/libs/${APP_NAME}.jar /app  &&\
     rm -rf /tmp/build/ &&\
-    rm -rf ~/.gradle &&\
+    rm -rf ~/.gradle
 
 VOLUME /app/config
 
