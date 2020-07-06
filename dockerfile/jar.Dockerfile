@@ -14,7 +14,7 @@ RUN mkdir -p /app/config &&\
     unzip gradle-$GRADLE_VERSION-bin.zip &&\
     cd ${GIT_REPO} &&\
     /tmp/build/gradle-${GRADLE_VERSION}/bin/gradle ${APP_NAME}:bootJar &&\
-    cp ${APP_NAME}/build/libs/${APP_NAME}.jar /app
+    cp ${APP_NAME}/build/libs/${APP_NAME}.jar /app  &&\
     rm -rf /tmp/build/ &&\
     rm -rf ~/.gradle &&\
 
