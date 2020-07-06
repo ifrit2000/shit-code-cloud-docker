@@ -1,0 +1,1 @@
+FROM myjdk:2
