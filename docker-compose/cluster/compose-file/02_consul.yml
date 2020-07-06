@@ -10,15 +10,15 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.11
-    command: ["agent", "-data-dir", "/consul/data", "-config-dir", "/consul/config", "-ui"]
-#    extra_hosts:
-#      - consul-1:${IP_ADDR_PREFIX}.11
-#      - consul-2:${IP_ADDR_PREFIX}.12
-#      - consul-3:${IP_ADDR_PREFIX}.13
+    command: ["agent",  "-config-dir", "/consul/config"]
+    extra_hosts:
+      - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+      - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
+      - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
     volumes:
       - ${DOCKER_VOLUME}/consul/node1:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/node1.json:/consul/config/node1.json
+  #      - ${DOCKER_CONFIG}/consul/node1.json:/consul/config/node1.json
   consul-2:
     <<: *consul
     container_name: consul-2
@@ -29,7 +29,7 @@ services:
     volumes:
       - ${DOCKER_VOLUME}/consul/node2:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/node2.json:/consul/config/node2.json
+  #      - ${DOCKER_CONFIG}/consul/node2.json:/consul/config/node2.json
   consul-3:
     <<: *consul
     container_name: consul-3
@@ -40,4 +40,19 @@ services:
     volumes:
       - ${DOCKER_VOLUME}/consul/node3:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/node3.json:/consul/config/node3.json
+#      - ${DOCKER_CONFIG}/consul/node3.json:/consul/config/node3.json
+#  consul-client:
+#    container_name: consul-client
+#    image: ${CONSUL_IMAGE}
+#    hostname: consul-client.shit-code.com
+#    networks:
+#      cluster-network:
+#        ipv4_address: ${IP_ADDR_PREFIX}.14
+#    command: ["agent", "-data-dir", "/consul/data", "-config-dir", "/consul/config", "-ui"]
+#    extra_hosts:
+#      - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+#      - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
+#      - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
+#    volumes:
+#      - ${DOCKER_VOLUME}/consul/node4:/consul/data
+#      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/config.json
