@@ -14,5 +14,5 @@ else
   echo "consul配置目录: ${CONSUL_CONFIG_DIR_PARAM}"
   nohub consul agent -config-dir=${CONSUL_CONFIG_DIR_PARAM} > /dev/null 2>&1 &
 fi
-
+consul agent -dev -bind=0.0.0.0 -client=0.0.0.0
 #java -jar ${APP}.jar
