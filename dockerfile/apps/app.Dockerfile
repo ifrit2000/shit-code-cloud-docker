@@ -1,15 +1,16 @@
 ARG GIT_REPO=shit-code-cloud-infrastructure
 ARG APP_NAME=infrastructure-admin
-
+ARG GIT_BRANCH=master
 FROM gradle:6.5.1-jdk11
 MAINTAINER Anthony
 ARG GIT_REPO
 ARG APP_NAME
-
+ARG GIT_BRANCH
 RUN mkdir -p /tmp/build &&\
     cd /tmp/build &&\
     git clone https://github.com/cd871127/${GIT_REPO}.git &&\
     cd ${GIT_REPO} &&\
+    git checkout ${GIT_BRANCH}
     gradle ${APP_NAME}:bootJar
 
 
