@@ -24,6 +24,9 @@ RUN set -eux && \
     mkdir -p /consul/config && \
     consul version
 
+RUN wget -O /usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64 && \
+    chmod +x /usr/bin/dumb-init
+
 VOLUME /consul/data
 
 EXPOSE 8300
