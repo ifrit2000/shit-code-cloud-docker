@@ -45,7 +45,8 @@ RUN set -eux && \
     consul version
 
 #RUN sysctl enable consul && \
-RUN    mkdir -p /etc/rc.d && \ mkdir -p /consul/data && \
+RUN mkdir -p /etc/rc.d && \
+    mkdir -p /consul/data && \
     mkdir -p /consul/config
 RUN echo 'consul agent -dev' > /etc/rc.d/rc.local
 
