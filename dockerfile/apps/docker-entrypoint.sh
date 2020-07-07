@@ -15,6 +15,4 @@ else
   nohub consul agent -config-dir=${CONSUL_CONFIG_DIR_PARAM} > /dev/null 2>&1 &
 fi
 
-
-#consul
 java -jar ${APP}.jar
