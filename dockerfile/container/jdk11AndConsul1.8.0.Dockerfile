@@ -26,13 +26,20 @@ RUN set -eux && \
     After=network-online.target \n\
     Wants=network-online.target \n\
     [Service] \n\
-    LimitCORE=infinity \n\
-    LimitNOFILE=100000 \n\
-    LimitNPROC=100000 \n\
-    EnvironmentFile=-/etc/sysconfig/consul \n\
+    Type=notify \n\
     ExecStart=consul agent -config-dir=/consul/config \n\
-    ExecReload=/bin/kill -HUP \$MAINPID \n\
-    KillSignal=SIGINT \n\
+    ExecReload=/bin/kill -s HUP \$MAINPID \n\
+    TimeoutSec=0 \n\
+    RestartSec=2 \n\
+    Restart=always \n\
+    StartLimitBurst=3 \n\
+    StartLimitInterval=60s \n\
+    LimitNOFILE=infinity \n\
+    LimitNPROC=infinity \n\
+    LimitCORE=infinity \n\
+    TasksMax=infinity \n\
+    Delegate=yes \n\
+    KillMode=process \n\
     [Install] \n\
     WantedBy=multi-user.target' > /lib/systemd/system/consul.service && \
     systemctl enable consul && \
