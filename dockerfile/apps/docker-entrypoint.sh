@@ -9,10 +9,10 @@ fi
 
 if [ "$(ls -A ${CONSUL_CONFIG_DIR_PARAM})" = "" ]; then
   echo 'consul配置目录为空, dev模式启动'
-  nohub consul agent -dev -bind=0.0.0.0 -client=0.0.0.0 > /consul/data/1 2>&1 &
+  nohup consul agent -dev -bind=0.0.0.0 -client=0.0.0.0 > /consul/data/1 2>&1 &
 else
   echo "consul配置目录: ${CONSUL_CONFIG_DIR_PARAM}"
-  nohub consul agent -config-dir=${CONSUL_CONFIG_DIR_PARAM} > /dev/null 2>&1 &
+  nohup consul agent -config-dir=${CONSUL_CONFIG_DIR_PARAM} > /dev/null 2>&1 &
 fi
-consul agent -dev -bind=0.0.0.0 -client=0.0.0.0
-#java -jar ${APP}.jar
+
+java -jar ${APP}.jar
