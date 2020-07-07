@@ -7,11 +7,11 @@ else
   CONSUL_CONFIG_DIR_PARAM=$CONSUL_CONFIG_DIR
 fi
 
-echo ${CONSUL_CONFIG_DIR_PARAM}
-
 if [ "$(ls -A ${CONSUL_CONFIG_DIR_PARAM})" = "" ]; then
+  echo 'consul配置目录为空, dev模式启动'
   consul agent -dev
 else
+  echo "consul配置目录: ${CONSUL_CONFIG_DIR_PARAM}"
   consul agent -config-dir=${CONSUL_CONFIG_DIR_PARAM}
 fi
 
