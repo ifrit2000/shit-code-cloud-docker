@@ -30,4 +30,6 @@ COPY docker-entrypoint.sh /bin
 VOLUME /app/config
 VOLUME /app/log
 
+EXPOSE 8080
+
 ENTRYPOINT ["docker-entrypoint.sh"]
