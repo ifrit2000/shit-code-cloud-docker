@@ -33,4 +33,6 @@ $ docker-compose up
 
 容器不退出
 docker run -dit centos /bin/bash
+容器启动
+https://www.cnblogs.com/sunsky303/p/11046681.html
 
