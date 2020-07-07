@@ -28,7 +28,7 @@ $ docker-compose up
 
 ## 搭建集群
 
-
+docker rmi `docker images | grep xxxxx | awk '{print $3}'`
 
 
 容器不退出

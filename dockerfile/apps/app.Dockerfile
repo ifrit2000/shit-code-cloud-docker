@@ -13,13 +13,16 @@ RUN mkdir -p /tmp/build &&\
     gradle ${APP_NAME}:bootJar
 
 
-FROM cd871127/container:java11.consul1.8.0
+FROM cd871127/container:0.0.1
 ARG GIT_REPO
 ARG APP_NAME
 
 ENV APP=${APP_NAME}
 RUN mkdir -p /app/config &&\
-    mkdir -p /app/data
+    mkdir -p /app/log
+
+COPY docker-entrypoint.sh /bin
+
 WORKDIR /app
 COPY --from=0 /tmp/build/${GIT_REPO}/${APP_NAME}/build/libs/${APP_NAME}.jar .
 COPY docker-entrypoint.sh /bin
