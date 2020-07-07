@@ -42,7 +42,7 @@ RUN set -eux && \
     KillMode=process \n\
     [Install] \n\
     WantedBy=multi-user.target' > /lib/systemd/system/consul.service && \
-    systemctl enable consul && \
+    sysctl enable consul && \
     consul version
 
 RUN mkdir -p /consul/data && \
