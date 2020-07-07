@@ -1,9 +1,9 @@
 FROM openjdk:11
 MAINTAINER Anthony
 
-ENV CONSUL_VERSION=1.8.0
+ARG CONSUL_VERSION=1.8.0
 
-ENV HASHICORP_RELEASES=https://releases.hashicorp.com
+ARG HASHICORP_RELEASES=https://releases.hashicorp.com
 
 RUN set -eux && \
     mkdir -p /tmp/build && \

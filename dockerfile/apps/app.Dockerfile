@@ -13,7 +13,7 @@ RUN mkdir -p /tmp/build &&\
     git checkout -b ${GIT_BRANCH} origin/${GIT_BRANCH}  &&\
     gradle ${APP_NAME}:bootJar
 
-FROM cd871127/container:0.0.1
+FROM cd871127/container:0.0.2
 ARG GIT_REPO
 ARG APP_NAME
 
