@@ -1,6 +1,17 @@
 #!/usr/bin/env sh
 set -e
 
-consul agent -config-dir=/consul/config -data-dir=/consul/data
+if [ ! ${CONSUL_CONFIG_DIR} ]; then
+  CONSUL_CONFIG_DIR_PARAM=/consul/config
+else
+  CONSUL_CONFIG_DIR_PARAM=$CONSUL_CONFIG_DIR
+fi
+
+if [ "$(ls -A ${CONSUL_CONFIG_DIR_PARAM})" = "" ]; then
+  consul agent -dev
+else
+  consul agent -config-dir=${CONSUL_CONFIG_DIR_PARAM}
+fi
+
 #consul
 java -jar ${APP}.jar
