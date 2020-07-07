@@ -41,11 +41,11 @@ RUN set -eux && \
     Delegate=yes \n\
     KillMode=process \n\
     [Install] \n\
-    WantedBy=multi-user.target' > /lib/systemd/system/consul.service && \
-    sysctl enable consul && \
+    WantedBy=multi-user.target' > /lib/systemd/system/consul.service &&
     consul version
 
-RUN mkdir -p /consul/data && \
+RUN sysctl enable consul && \
+    mkdir -p /consul/data && \
     mkdir -p /consul/config
 
 VOLUME /consul/data
