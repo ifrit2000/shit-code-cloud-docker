@@ -7,6 +7,8 @@ else
   CONSUL_CONFIG_DIR_PARAM=$CONSUL_CONFIG_DIR
 fi
 
+echo ${CONSUL_CONFIG_DIR_PARAM}
+
 if [ "$(ls -A ${CONSUL_CONFIG_DIR_PARAM})" = "" ]; then
   consul agent -dev
 else
