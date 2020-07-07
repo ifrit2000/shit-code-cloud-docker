@@ -31,8 +31,11 @@ $ docker-compose up
 docker rmi `docker images | grep xxxxx | awk '{print $3}'`
 
 
-容器不退出
+
 docker run -dit centos /bin/bash
 容器启动
 https://www.cnblogs.com/sunsky303/p/11046681.html
+
+容器不退出
+https://wenjudagege.com/posts/dumb-init%E5%BA%94%E7%94%A8%E4%B8%8E%E8%B8%A9%E5%9D%91%E6%89%8B%E5%86%8C/
 
