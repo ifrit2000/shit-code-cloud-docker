@@ -26,4 +26,8 @@ COPY docker-entrypoint.sh /bin
 WORKDIR /app
 COPY --from=0 /tmp/build/${GIT_REPO}/${APP_NAME}/build/libs/${APP_NAME}.jar .
 COPY docker-entrypoint.sh /bin
+
+VOLUME /app/config
+VOLUME /app/log
+
 ENTRYPOINT ["docker-entrypoint.sh"]
