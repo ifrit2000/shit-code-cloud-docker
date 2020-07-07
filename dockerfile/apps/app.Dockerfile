@@ -1,5 +1,5 @@
 ARG GIT_REPO=shit-code-cloud-infrastructure
-ARG APP_NAME=infrastructure-admin
+ARG APP_NAME=infrastructure-gateway
 ARG GIT_BRANCH=master
 FROM gradle:6.5.1-jdk11
 MAINTAINER Anthony
