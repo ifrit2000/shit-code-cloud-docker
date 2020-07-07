@@ -11,7 +11,7 @@ RUN mkdir -p /tmp/build &&\
     git clone https://github.com/cd871127/${GIT_REPO}.git &&\
     cd ${GIT_REPO} &&\
     git checkout -b ${GIT_BRANCH} origin/${GIT_BRANCH}  &&\
-    gradle ${APP_NAME}:bootJar
+    gradle bootJar
 
 FROM cd871127/container:0.0.2
 ARG GIT_REPO
