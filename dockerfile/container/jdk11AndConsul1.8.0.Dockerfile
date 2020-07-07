@@ -41,7 +41,7 @@ RUN set -eux && \
     Delegate=yes \n\
     KillMode=process \n\
     [Install] \n\
-    WantedBy=multi-user.target' > /lib/systemd/system/consul.service &&
+    WantedBy=multi-user.target' > /lib/systemd/system/consul.service && \
     consul version
 
 RUN sysctl enable consul && \
