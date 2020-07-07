@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/dumb-init /bin/sh
 set -e
 
 if [ ! ${CONSUL_CONFIG_DIR} ]; then
