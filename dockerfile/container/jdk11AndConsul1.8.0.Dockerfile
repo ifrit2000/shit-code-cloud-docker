@@ -44,9 +44,10 @@ RUN set -eux && \
     WantedBy=multi-user.target' > /lib/systemd/system/consul.service && \
     consul version
 
-RUN sysctl enable consul && \
-    mkdir -p /consul/data && \
+#RUN sysctl enable consul && \
+RUN    mkdir -p /consul/data && \
     mkdir -p /consul/config
+RUN echo 'consul agent -dev' > /etc/rc.d/rc.local
 
 VOLUME /consul/data
 
