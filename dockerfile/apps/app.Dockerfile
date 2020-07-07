@@ -10,7 +10,7 @@ RUN mkdir -p /tmp/build &&\
     cd /tmp/build &&\
     git clone https://github.com/cd871127/${GIT_REPO}.git &&\
     cd ${GIT_REPO} &&\
-    git checkout ${GIT_BRANCH}
+    git checkout ${GIT_BRANCH} &&\
     gradle ${APP_NAME}:bootJar
 
 
