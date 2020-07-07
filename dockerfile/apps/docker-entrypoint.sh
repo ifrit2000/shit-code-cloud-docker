@@ -4,7 +4,7 @@ set -e
 if [ ! ${CONSUL_CONFIG_DIR} ]; then
   CONSUL_CONFIG_DIR_PARAM=/consul/config
 else
-  CONSUL_CONFIG_DIR_PARAM=$CONSUL_CONFIG_DIR
+  CONSUL_CONFIG_DIR_PARAM=${CONSUL_CONFIG_DIR}
 fi
 
 if [ "$(ls -A ${CONSUL_CONFIG_DIR_PARAM})" = "" ]; then
@@ -15,4 +15,4 @@ else
   nohub consul agent -config-dir=${CONSUL_CONFIG_DIR_PARAM} > /dev/null 2>&1 &
 fi
 
-java -jar ${APP}.jar
+#java -jar ${APP}.jar
