@@ -9,6 +9,10 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.101
+    extra_hosts:
+      - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+      - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
+      - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
     volumes:
       - ${DOCKER_VOLUME}/infrastructure/logs/admin1:/app/log
       - ${DOCKER_VOLUME}/infrastructure/config/admin:/app/config
