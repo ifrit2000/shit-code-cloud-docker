@@ -17,7 +17,7 @@ services:
       - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
     volumes:
       - ${DOCKER_VOLUME}/consul/node1:/consul/data
-    &consul_vol
+      &consul_vol
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
   #      - ${DOCKER_CONFIG}/consul/node1.json:/consul/config/node1.json
