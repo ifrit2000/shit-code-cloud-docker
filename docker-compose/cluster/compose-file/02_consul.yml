@@ -27,7 +27,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.12
     volumes: *consul_vol
-      - ${DOCKER_VOLUME}/consul/node2:/consul/data
+#      - ${DOCKER_VOLUME}/consul/node2:/consul/data
   #      - ${DOCKER_CONFIG}/consul/node2.json:/consul/config/node2.json
   consul-3:
     <<: *consul
@@ -37,7 +37,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.13
     volumes: *consul_vol
-      - ${DOCKER_VOLUME}/consul/node3:/consul/data
+#      - ${DOCKER_VOLUME}/consul/node3:/consul/data
 
 #      - ${DOCKER_CONFIG}/consul/node3.json:/consul/config/node3.json
 #  consul-client:
