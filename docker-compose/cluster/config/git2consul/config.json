@@ -9,7 +9,7 @@
       "source_root": "/docker-compose/cluster/config/apps/",
       "skip_branch_name": true,
       "skip_repo_name": true,
-      "mount_point": "cluster/"
+      "mount_point": "config/cluster/"
     }
   ],
   "consul": {
