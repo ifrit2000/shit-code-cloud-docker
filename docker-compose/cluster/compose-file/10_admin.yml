@@ -11,7 +11,9 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.101
     volumes:
       - ${DOCKER_VOLUME}/infrastructure/logs/admin1:/app/log
-      - ${DOCKER_CONFIG}/infrastructure/admin:/app/config
+      - ${DOCKER_VOLUME}/infrastructure/config/admin:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
   admin-2:
     <<: *admin
     container_name: admin-2
@@ -21,6 +23,7 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.102
     volumes:
       - ${DOCKER_VOLUME}/infrastructure/logs/admin2:/app/log
-      - ${DOCKER_CONFIG}/infrastructure/admin:/app/config
-      - ${DOCKER_CONFIG}/consul/client.json:/app/config
+      - ${DOCKER_VOLUME}/infrastructure/config/admin:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
 

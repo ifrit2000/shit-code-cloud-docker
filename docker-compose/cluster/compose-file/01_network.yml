@@ -15,3 +15,5 @@ x-hosts:
     - rabbit-1:${IP_ADDR_PREFIX}.41
     - rabbit-2:${IP_ADDR_PREFIX}.42
     - rabbit-3:${IP_ADDR_PREFIX}.43
+
+
