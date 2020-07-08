@@ -9,11 +9,16 @@ networks:
       config:
         - subnet: ${IP_ADDR_PREFIX}.0/16
 
-x-hosts:
-  &default-hosts
-  extra_hosts:
-    - rabbit-1:${IP_ADDR_PREFIX}.41
-    - rabbit-2:${IP_ADDR_PREFIX}.42
-    - rabbit-3:${IP_ADDR_PREFIX}.43
-
-
+services:
+  haproxy:
+    container_name: rabbit-haproxy
+    image: ${HAPROXY_IMAGE}
+    hostname: rabbit-haproxy.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.40
+    #    command: ["-f","/usr/local/etc/haproxy/haproxy.cfg"]
+    ports:
+      - 1080:1080
+    volumes:
+      - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
