@@ -22,4 +22,5 @@ services:
     volumes:
       - ${DOCKER_VOLUME}/infrastructure/logs/admin2:/app/log
       - ${DOCKER_CONFIG}/infrastructure/admin:/app/config
+      - ${DOCKER_CONFIG}/consul/client.json:/app/config
 

@@ -6,11 +6,8 @@
   "log_rotate_bytes": 268435456,
   "log_rotate_max_files": 100,
   "data_dir": "/consul/data",
-  "server": true,
-  "bootstrap_expect": 3,
   "bind_addr": "0.0.0.0",
   "client_addr": "0.0.0.0",
-  "ui": true,
   "rejoin_after_leave": true,
   "retry_join": [
     "consul-1.shit-code.com",
@@ -20,3 +17,5 @@
   "retry_interval": "5s",
   "reconnect_timeout": "72h"
 }
+
+
