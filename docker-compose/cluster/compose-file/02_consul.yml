@@ -28,7 +28,8 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.12
     volumes: *consul_vol
 #      - ${DOCKER_VOLUME}/consul/node2:/consul/data
-  #      - ${DOCKER_CONFIG}/consul/node2.json:/consul/config/node2.json
+
+      - ${DOCKER_CONFIG}/consul/node2.json:/consul/config/node2.json
   consul-3:
     <<: *consul
     container_name: consul-3
