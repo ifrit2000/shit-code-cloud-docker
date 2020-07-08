@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  gateway-1:
+    &gateway
+    container_name: gateway-1
+    image: ${GATEWAY_IMAGE}
+    hostname: gateway-1.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.111
+    extra_hosts:
+      - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+      - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
+      - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
+      - admin-1.shit-code.com:${IP_ADDR_PREFIX}.101
+      - admin-2.shit-code.com:${IP_ADDR_PREFIX}.102
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/gateway1:/app/log
+      - ${DOCKER_CONFIG}/infrastructure/config/gateway:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
+  gateway-2:
+    <<: *gateway
+    container_name: gateway-2
+    hostname: gateway-2.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.112
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/gateway2:/app/log
+      - ${DOCKER_CONFIG}/infrastructure/config/gateway:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
+
