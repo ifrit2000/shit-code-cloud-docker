@@ -1,0 +1,17 @@
+{
+  "repos": [
+    {
+      "name": "config",
+      "url": "http://github.com/cd871127/shit-code-cloud-docker.git",
+      "branches": [
+        "anthony_dev"
+      ],
+      "source_root": "/docker-compose/cluster/config/apps/",
+      "skip_branch_name": true,
+      "skip_repo_name": false
+    }
+  ],
+  "consul": {
+    "address": "consul-1.shit-code.com:8500"
+  }
+}
