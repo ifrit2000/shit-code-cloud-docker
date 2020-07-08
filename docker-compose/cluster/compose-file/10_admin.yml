@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  admin-1:
+    &admin
+    container_name: admin-1
+    image: ${ADMIN_IMAGE}
+    hostname: admin-1.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.101
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/admin1:/app/log
+      - ${DOCKER_CONFIG}/infrastructure/admin:/app/config
+  admin-2:
+    <<: *admin
+    container_name: admin-2
+    hostname: admin-2.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.102
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/admin2:/app/log
+      - ${DOCKER_CONFIG}/infrastructure/admin:/app/config
+
