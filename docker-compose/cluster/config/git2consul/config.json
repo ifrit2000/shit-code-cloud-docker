@@ -4,7 +4,7 @@
       "name": "config",
       "url": "http://github.com/cd871127/shit-code-cloud-docker.git",
       "branches": [
-        "anthony_dev"
+        "dev"
       ],
       "source_root": "/docker-compose/cluster/config/apps/",
       "skip_branch_name": true,
