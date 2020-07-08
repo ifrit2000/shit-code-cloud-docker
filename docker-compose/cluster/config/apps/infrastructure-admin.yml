@@ -4,4 +4,3 @@ spring:
     admin:
       discovery:
         ignored-services: consul
-

@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "local_store": "/var/lib/git2consul_cache",
+  "logger": {
+    "name": "git2consul",
+    "streams": [
+      {
+        "level": "trace",
+        "stream": "process.stdout"
+      },
+      {
+        "level": "debug",
+        "type": "rotating-file",
+        "path": "/var/log/git2consul/git2consul.log"
+      }
+    ]
+  },
+  "repos": [
+    {
+      "name": "cluster",
+      "url": "https://github.com/cd871127/shit-code-cloud-docker.git",
+      "include_branch_name": false,
+      "source_root": "docker-compose/cluster/config/apps/",
+      "mountpoint": "config",
+      "branches": [
+        "dev"
+      ],
+      "hooks": [
+        {
+          "type": "polling",
+          "interval": "1"
+        }
+      ]
+    }
+  ]
+}
