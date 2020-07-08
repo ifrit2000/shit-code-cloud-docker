@@ -17,7 +17,7 @@ services:
       - ${DOCKER_VOLUME}/infrastructure/logs/admin1:/app/log
       - ${DOCKER_VOLUME}/infrastructure/config/admin:/app/config
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
   admin-2:
     <<: *admin
     container_name: admin-2
@@ -29,5 +29,5 @@ services:
       - ${DOCKER_VOLUME}/infrastructure/logs/admin2:/app/log
       - ${DOCKER_VOLUME}/infrastructure/config/admin:/app/config
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
 
