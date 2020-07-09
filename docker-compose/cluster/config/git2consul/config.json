@@ -34,7 +34,7 @@
     }
   ,
     {
-      "name": "dev",
+      "name": "cluster",
       "url": "https://github.com/cd871127/shit-code-cloud-infrastructure.git",
       "include_branch_name": false,
       "source_root": "config/dev/",
