@@ -9,22 +9,22 @@ networks:
       config:
         - subnet: ${IP_ADDR_PREFIX}.0/16
 
+x-hosts:
+  &default-hosts
+  extra_hosts:
+    - consul.shit-code.com:${IP_ADDR_PREFIX}.11
+    - redis.shit-code.com:${IP_ADDR_PREFIX}.31
+    - nginx.shit-code.com:${IP_ADDR_PREFIX}.92
+    - mysql.shit-code.com:${IP_ADDR_PREFIX}.21
+    - rabbit.shit-code.com:${IP_ADDR_PREFIX}.41
+    - zipkin.shit-code.com:${IP_ADDR_PREFIX}.51
+
+
 services:
-  nginx:
-    container_name: nginx
-    image: ${NGINX_IMAGE}
-    hostname: nginx
-    ports:
-      - 80:80
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.92
-    volumes:
-      - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
   consul:
     container_name: consul
     image: ${CONSUL_IMAGE}
-    hostname: consul
+    hostname: consul.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.11
@@ -36,20 +36,19 @@ services:
   redis:
     container_name: redis
     image: ${REDIS_IMAGE}
-    hostname: redis
+    hostname: redis.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.31
-    #    command: ["/usr/local/etc/redis/redis.conf"]
     ports:
       - 6379:6379
     volumes:
       - ${DOCKER_VOLUME}/redis:/data
-  #      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
+        - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   mysql:
     container_name: mysql
     image: ${MYSQL_IMAGE}
-    hostname: mysql
+    hostname: mysql.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.21
@@ -63,7 +62,7 @@ services:
   rabbit:
     container_name: rabbit
     image: ${RABBITMQ_IMAGE}
-    hostname: rabbit
+    hostname: rabbit.shit-code.com
     ports:
       - 4369:4369
       - 5671:5671
@@ -77,9 +76,20 @@ services:
   zipkin:
     container_name: zipkin
     image: ${ZIPKIN_IMAGE}
-    hostname: zipkin
+    hostname: zipkin.shit-code.com
     ports:
       - 9411:9411
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
+  nginx:
+    container_name: nginx
+    image: ${NGINX_IMAGE}
+    hostname: nginx.shit-code.com
+    ports:
+      - 80:80
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.92
+    volumes:
+      - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
