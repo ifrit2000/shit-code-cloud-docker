@@ -4,7 +4,6 @@ networks:
   cluster-network:
     external: true
 
-
 services:
   git2consul:
     container_name: git2consul
@@ -19,18 +18,4 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.61
     volumes:
-      - ${DOCKER_CONFIG}/git2consul/config_node.json:/etc/git2consul.d/config.json
-#  git2consul:
-#    container_name: git2consul
-#    image: trendyoltech/git2consul-go
-#    hostname: git2consul.shit-code.com
-#    command: ['git2consul','-config','/etc/git2consul.json']
-#    extra_hosts:
-#      - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
-#      - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
-#      - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.61
-#    volumes:
-#      - ${DOCKER_CONFIG}/git2consul/config.json:/etc/git2consul.json
+      - ${DOCKER_CONFIG}/git2consul/config:/etc/git2consul.d/config.json
