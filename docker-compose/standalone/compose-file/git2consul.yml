@@ -9,7 +9,7 @@ services:
     container_name: git2consul
     image: cimpress/git2consul
     hostname: git2consul.shit-code.com
-    command: ['--endpoint','consul-1.shit-code.com','--port','8500','--config-file','/etc/git2consul.d/config.json']
+    command: ['--endpoint','consul-standalone.shit-code.com','--port','8500','--config-file','/etc/git2consul.d/config.json']
     extra_hosts:
       - consul-standalone.shit-code.com:${IP_ADDR_PREFIX}.11
     networks:
