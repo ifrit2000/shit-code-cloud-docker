@@ -23,7 +23,7 @@ x-hosts:
 
 
 services:
-  consul:
+  consul-1:
     <<: *default-hosts
     container_name: consul
     image: ${CONSUL_IMAGE}
@@ -31,11 +31,11 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.11
-    command: ["agent","-server", "-data-dir", "/consul/data", "-config-dir", "/consul/config", "-ui","-bootstrap-expect","1","-client","0.0.0.0"]
-    ports:
-      - 8500:8500
+    command: ["agent",  "-config-dir", "/consul/config"]
     volumes:
-      - ${DOCKER_VOLUME}/consul:/consul/data
+      - ${DOCKER_VOLUME}/consul/node1:/consul/data
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
   redis:
     <<: *default-hosts
     container_name: redis

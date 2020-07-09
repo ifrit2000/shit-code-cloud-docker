@@ -1,0 +1,18 @@
+{
+  "datacenter": "dc1",
+  "log_level": "DEBUG",
+  "log_file": "/consul/data/",
+  "log_rotate_duration": "24h",
+  "log_rotate_bytes": 268435456,
+  "log_rotate_max_files": 100,
+  "data_dir": "/consul/data",
+  "bind_addr": "0.0.0.0",
+  "rejoin_after_leave": true,
+  "retry_join": [
+    "consul-1.shit-code.com"
+  ],
+  "retry_interval": "5s",
+  "reconnect_timeout": "72h"
+}
+
+
