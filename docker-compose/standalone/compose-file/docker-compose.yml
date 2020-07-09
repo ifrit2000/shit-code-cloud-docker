@@ -37,6 +37,7 @@ services:
     volumes:
       - ${DOCKER_VOLUME}/consul:/consul/data
   redis:
+    <<: *default-hosts
     container_name: redis
     image: ${REDIS_IMAGE}
     hostname: redis-1.shit-code.com
@@ -49,6 +50,7 @@ services:
       - ${DOCKER_VOLUME}/redis:/data
         - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   mysql:
+    <<: *default-hosts
     container_name: mysql
     image: ${MYSQL_IMAGE}
     hostname: mysql-1.shit-code.com
@@ -63,6 +65,7 @@ services:
       - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ${DOCKER_VOLUME}/mysql:/var/lib/mysql
   rabbit:
+    <<: *default-hosts
     container_name: rabbit
     image: ${RABBITMQ_IMAGE}
     hostname: rabbit-1.shit-code.com
@@ -77,6 +80,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.41
   zipkin:
+    <<: *default-hosts
     container_name: zipkin
     image: ${ZIPKIN_IMAGE}
     hostname: zipkin-1.shit-code.com
@@ -86,6 +90,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
   nginx:
+    <<: *default-hosts
     container_name: nginx
     image: ${NGINX_IMAGE}
     hostname: nginx-1.shit-code.com
@@ -97,6 +102,7 @@ services:
     volumes:
       - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
   admin:
+    <<: *default-hosts
     container_name: admin
     image: ${ADMIN_IMAGE}
     hostname: admin-1.shit-code.com
@@ -109,6 +115,7 @@ services:
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
   gateway:
+    <<: *default-hosts
     container_name: gateway
     image: ${GATEWAY_IMAGE}
     hostname: gateway-1.shit-code.com
