@@ -16,4 +16,4 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.61
     volumes:
-      - ${DOCKER_CONFIG}/git2consul/config_node.json:/etc/git2consul.d/config.json
+      - ${DOCKER_CONFIG}/git2consul/config.json:/etc/git2consul.d/config.json
