@@ -7,21 +7,21 @@ networks:
 x-hosts:
   &default-hosts
   extra_hosts:
-    - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
-    - redis-1.shit-code.com:${IP_ADDR_PREFIX}.31
-    - nginx-1.shit-code.com:${IP_ADDR_PREFIX}.92
-    - mysql-1.shit-code.com:${IP_ADDR_PREFIX}.21
-    - rabbit-1.shit-code.com:${IP_ADDR_PREFIX}.41
-    - zipkin-1.shit-code.com:${IP_ADDR_PREFIX}.51
-    - admin-1.shit-code.com:${IP_ADDR_PREFIX}.101
-    - gateway-1.shit-code.com:${IP_ADDR_PREFIX}.111
+    - consul-standalone.shit-code.com:${IP_ADDR_PREFIX}.11
+    - redis-standalone.shit-code.com:${IP_ADDR_PREFIX}.31
+    - nginx-standalone.shit-code.com:${IP_ADDR_PREFIX}.92
+    - mysql-standalone.shit-code.com:${IP_ADDR_PREFIX}.21
+    - rabbit-standalone.shit-code.com:${IP_ADDR_PREFIX}.41
+    - zipkin-standalone.shit-code.com:${IP_ADDR_PREFIX}.51
+    - admin-standalone.shit-code.com:${IP_ADDR_PREFIX}.101
+    - gateway-standalone.shit-code.com:${IP_ADDR_PREFIX}.111
 
 services:
   admin:
     <<: *default-hosts
     container_name: admin
     image: ${ADMIN_IMAGE}
-    hostname: admin-1.shit-code.com
+    hostname: admin-standalone.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.101
@@ -36,7 +36,7 @@ services:
     <<: *default-hosts
     container_name: gateway
     image: ${GATEWAY_IMAGE}
-    hostname: gateway-1.shit-code.com
+    hostname: gateway-standalone.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.111
