@@ -20,7 +20,7 @@
       "name": "cluster",
       "url": "https://github.com/cd871127/shit-code-cloud-infrastructure.git",
       "include_branch_name": false,
-      "source_root": "config/cluster/",
+      "source_root": "/config/cluster/",
       "mountpoint": "config",
       "branches": [
         "dev"
@@ -37,7 +37,7 @@
       "name": "dev",
       "url": "https://github.com/cd871127/shit-code-cloud-infrastructure.git",
       "include_branch_name": false,
-      "source_root": "config/dev",
+      "source_root": "/config/dev",
       "mountpoint": "config",
       "branches": [
         "dev"
