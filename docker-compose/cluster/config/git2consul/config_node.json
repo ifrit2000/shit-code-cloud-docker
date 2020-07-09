@@ -31,6 +31,22 @@
           "interval": "1"
         }
       ]
+    },
+    {
+      "name": "dev",
+      "url": "https://github.com/cd871127/shit-code-cloud-docker.git",
+      "include_branch_name": false,
+      "source_root": "docker-compose/cluster/config/apps/",
+      "mountpoint": "config",
+      "branches": [
+        "dev"
+      ],
+      "hooks": [
+        {
+          "type": "polling",
+          "interval": "1"
+        }
+      ]
     }
   ]
 }
