@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  cluster-network:
+    external: true
+
 x-hosts:
   &default-hosts
   extra_hosts:
