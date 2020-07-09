@@ -12,19 +12,21 @@ networks:
 x-hosts:
   &default-hosts
   extra_hosts:
-    - consul.shit-code.com:${IP_ADDR_PREFIX}.11
-    - redis.shit-code.com:${IP_ADDR_PREFIX}.31
-    - nginx.shit-code.com:${IP_ADDR_PREFIX}.92
-    - mysql.shit-code.com:${IP_ADDR_PREFIX}.21
-    - rabbit.shit-code.com:${IP_ADDR_PREFIX}.41
-    - zipkin.shit-code.com:${IP_ADDR_PREFIX}.51
+    - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+    - redis-1.shit-code.com:${IP_ADDR_PREFIX}.31
+    - nginx-1.shit-code.com:${IP_ADDR_PREFIX}.92
+    - mysql-1.shit-code.com:${IP_ADDR_PREFIX}.21
+    - rabbit-1.shit-code.com:${IP_ADDR_PREFIX}.41
+    - zipkin-1.shit-code.com:${IP_ADDR_PREFIX}.51
+    - admin-1.shit-code.com:${IP_ADDR_PREFIX}.101
+    - gateway-1.shit-code.com:${IP_ADDR_PREFIX}.111
 
 
 services:
   consul:
     container_name: consul
     image: ${CONSUL_IMAGE}
-    hostname: consul.shit-code.com
+    hostname: consul-1.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.11
@@ -36,7 +38,7 @@ services:
   redis:
     container_name: redis
     image: ${REDIS_IMAGE}
-    hostname: redis.shit-code.com
+    hostname: redis-1.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.31
@@ -48,7 +50,7 @@ services:
   mysql:
     container_name: mysql
     image: ${MYSQL_IMAGE}
-    hostname: mysql.shit-code.com
+    hostname: mysql-1.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.21
@@ -62,7 +64,7 @@ services:
   rabbit:
     container_name: rabbit
     image: ${RABBITMQ_IMAGE}
-    hostname: rabbit.shit-code.com
+    hostname: rabbit-1.shit-code.com
     ports:
       - 4369:4369
       - 5671:5671
@@ -76,7 +78,7 @@ services:
   zipkin:
     container_name: zipkin
     image: ${ZIPKIN_IMAGE}
-    hostname: zipkin.shit-code.com
+    hostname: zipkin-1.shit-code.com
     ports:
       - 9411:9411
     networks:
@@ -85,7 +87,7 @@ services:
   nginx:
     container_name: nginx
     image: ${NGINX_IMAGE}
-    hostname: nginx.shit-code.com
+    hostname: nginx-1.shit-code.com
     ports:
       - 80:80
     networks:
@@ -93,3 +95,27 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.92
     volumes:
       - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
+  admin:
+    container_name: admin
+    image: ${ADMIN_IMAGE}
+    hostname: admin-1.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.101
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/admin1:/app/log
+      - ${DOCKER_CONFIG}/infrastructure/config/admin:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
+  gateway:
+    container_name: gateway
+    image: ${GATEWAY_IMAGE}
+    hostname: gateway-1.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.111
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/gateway1:/app/log
+      - ${DOCKER_CONFIG}/infrastructure/config/gateway:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
