@@ -5,7 +5,12 @@ GIT_BRANCH=dev
 APP_NAMES=(gateway admin)
 TMP_IMAGE=app-base:tmp
 
-docker build --build-arg GIT_BRANCH=${GIT_BRANCH} --build-arg GIT_POSTFIX=${GIT_POSTFIX} -f base.Dockerfile -t ${TMP_IMAGE} .
+if [ ! $1 ]; then
+  docker build --no-cache --build-arg GIT_BRANCH=${GIT_BRANCH} --build-arg GIT_POSTFIX=${GIT_POSTFIX} -f base.Dockerfile -t ${TMP_IMAGE} .
+else
+  docker build --build-arg GIT_BRANCH=${GIT_BRANCH} --build-arg GIT_POSTFIX=${GIT_POSTFIX} -f base.Dockerfile -t ${TMP_IMAGE} .
+fi
+
 
 for APP_NAME in ${APP_NAMES[*]}; do
   JAR_NAME=${GIT_POSTFIX}-${APP_NAME}
