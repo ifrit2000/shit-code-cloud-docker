@@ -48,7 +48,7 @@ services:
       - 6379:6379
     volumes:
       - ${DOCKER_VOLUME}/redis:/data
-        - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   mysql:
     <<: *default-hosts
     container_name: mysql
