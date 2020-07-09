@@ -9,6 +9,6 @@ docker build --build-arg GIT_BRANCH=${GIT_BRANCH} --build-arg GIT_POSTFIX=${GIT_
 
 for APP_NAME in ${APP_NAMES[*]}; do
   JAR_NAME=${GIT_POSTFIX}-${APP_NAME}
-  docker build --build-arg APP_NAME=${APP_NAME} --build-arg GIT_POSTFIX=${GIT_POSTFIX} -f app.Dockerfile -t cd871127/${JAR_NAME}:dev .
+  docker build --no-cache --build-arg APP_NAME=${APP_NAME} --build-arg GIT_POSTFIX=${GIT_POSTFIX} -f app.Dockerfile -t cd871127/${JAR_NAME}:dev .
 done
 #docker rmi ${TMP_IMAGE}
