@@ -15,4 +15,4 @@ else
   nohup consul agent -config-dir=${CONSUL_CONFIG_DIR_PARAM} > /dev/null 2>&1 &
 fi
 
-java -Xmx512m -Xms512m -Xmn192m -jar ${APP}.jar --spring.profiles.active=cluster -xmx
+java -Xmx512m -Xms512m -Xmn192m -jar ${JAR_NAME}.jar --spring.profiles.active=cluster -xmx
