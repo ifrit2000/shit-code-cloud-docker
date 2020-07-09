@@ -7,7 +7,7 @@
 GIT_POSTFIX=infrastructure
 GIT_BRANCH=dev
 
-APP_NAME=infrastructure-admin
+APP_NAME=infrastructure-gateway
 
 docker build --build-arg GIT_BRANCH=${GIT_BRANCH} --build-arg GIT_POSTFIX=${GIT_POSTFIX} -f base.Dockerfile -t app-base:tmp .
 
