@@ -24,6 +24,7 @@ x-hosts:
 
 services:
   consul:
+    <<: *default-hosts
     container_name: consul
     image: ${CONSUL_IMAGE}
     hostname: consul-1.shit-code.com
