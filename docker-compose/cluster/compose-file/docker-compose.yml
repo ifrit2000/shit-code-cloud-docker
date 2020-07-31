@@ -80,7 +80,7 @@ services:
       - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ${DOCKER_CONFIG}/mysql/master.cnf:/etc/mysql/conf.d/master.cnf
       - ${DOCKER_CONFIG}/mysql/server1.cnf:/etc/mysql/conf.d/server1.cnf
-      - ${DOCKER_VOLUME}/mysql/master1:/var/lib/mysql
+      - ${DOCKER_VOLUME}/mysql/master:/var/lib/mysql
   mysql-slave:
     <<: *mysql
     container_name: mysql-slave
@@ -93,7 +93,7 @@ services:
     volumes:
       - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ${DOCKER_CONFIG}/mysql/server3.cnf:/etc/mysql/conf.d/server3.cnf
-      - ${DOCKER_VOLUME}/mysql/slave1:/var/lib/mysql
+      - ${DOCKER_VOLUME}/mysql/slave:/var/lib/mysql
   redis-1:
     &redis
     <<: *default-hosts
