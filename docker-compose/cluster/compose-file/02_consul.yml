@@ -41,3 +41,21 @@ services:
       - ${DOCKER_VOLUME}/consul/node3:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
+  git2consul:
+    depends_on:
+      - consul-1
+      - consul-2
+      - consul-3
+    container_name: git2consul
+    image: cimpress/git2consul
+    hostname: git2consul.shit-code.com
+    command: ['--endpoint','consul-1.shit-code.com','--port','8500','--config-file','/etc/git2consul.d/config.json']
+    extra_hosts:
+      - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+      - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
+      - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.19
+    volumes:
+      - ${DOCKER_CONFIG}/git2consul/config.json:/etc/git2consul.d/config.json
