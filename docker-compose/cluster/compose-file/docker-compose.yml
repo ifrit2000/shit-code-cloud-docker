@@ -28,132 +28,57 @@ networks:
 
 #consul集群配置
 services:
-  consul-1:
-    &consul
-    <<: *default-hosts
-    container_name: consul-1
-    image: ${CONSUL_IMAGE}
-    hostname: consul-1.shit-code.com
+
+
+
+  rabbit_haproxy:
+    container_name: rabbit-haproxy
+    image: ${HAPROXY_IMAGE}
+    hostname: rabbit-haproxy.shit-code.com
     networks:
       cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.11
-    command: ["agent", "-config-dir", "/consul/config"]
+        ipv4_address: ${IP_ADDR_PREFIX}.40
+    #    command: ["-f","/usr/local/etc/haproxy/haproxy.cfg"]
+    ports:
+      - 1080:1080
     volumes:
-      - ${DOCKER_VOLUME}/consul/node1:/consul/data
-      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
-  consul-2:
-    <<: *consul
-    container_name: consul-2
-    hostname: consul-2.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.12
-    volumes:
-      - ${DOCKER_VOLUME}/consul/node2:/consul/data
-      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
-  consul-3:
-    <<: *consul
-    container_name: consul-3
-    hostname: consul-3.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.13
-    volumes:
-      - ${DOCKER_VOLUME}/consul/node3:/consul/data
-      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
-  mysql-master:
-    &mysql
-    <<: *default-hosts
-    container_name: mysql-master
-    image: ${MYSQL_IMAGE}
-    hostname: mysql-master.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.21
+      - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+  rabbit-1:
+    &rabbitmq
+    container_name: rabbit-1
+    image: ${RABBITMQ_IMAGE}
+    hostname: rabbit-1.shit-code.com
+    privileged: true
     environment:
-      - MYSQL_ROOT_PASSWORD=123456
-    #      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - RABBITMQ_ERLANG_COOKIE=rabbitcookie
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.41
+    extra_hosts:
+      - rabbit-1:${IP_ADDR_PREFIX}.41
+      - rabbit-2:${IP_ADDR_PREFIX}.42
+      - rabbit-3:${IP_ADDR_PREFIX}.43
     volumes:
-      - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ${DOCKER_CONFIG}/mysql/master.cnf:/etc/mysql/conf.d/master.cnf
-      - ${DOCKER_CONFIG}/mysql/server1.cnf:/etc/mysql/conf.d/server1.cnf
-      - ${DOCKER_VOLUME}/mysql/master:/var/lib/mysql
-  mysql-slave:
-    <<: *mysql
-    container_name: mysql-slave
-    hostname: mysql-slave-1.shit-code.com
+      - ${DOCKER_VOLUME}/rabbit/node1:/var/lib/rabbitmq/mnesia
+  rabbit-2:
     depends_on:
-      - mysql-master
+      - rabbit-1
+    <<: *rabbitmq
+    container_name: rabbit-2
+    hostname: rabbit-2.shit-code.com
     networks:
       cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.22
+        ipv4_address: ${IP_ADDR_PREFIX}.42
     volumes:
-      - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ${DOCKER_CONFIG}/mysql/server3.cnf:/etc/mysql/conf.d/server3.cnf
-      - ${DOCKER_VOLUME}/mysql/slave:/var/lib/mysql
-  redis-1:
-    &redis
-    <<: *default-hosts
-    container_name: redis-1
-    image: ${REDIS_IMAGE}
-    hostname: redis-1.shit-code.com
+      - ${DOCKER_VOLUME}/rabbit/node2:/var/lib/rabbitmq/mnesia
+  rabbit-3:
+    depends_on:
+      - rabbit-1
+    <<: *rabbitmq
+    container_name: rabbit-3
+    hostname: rabbit-3.shit-code.com
     networks:
       cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.31
-    command: ["/usr/local/etc/redis/redis.conf"]
+        ipv4_address: ${IP_ADDR_PREFIX}.43
     volumes:
-      - ${DOCKER_VOLUME}/redis/server1:/data
-      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
-  redis-2:
-    <<: *redis
-    container_name: redis-2
-    hostname: redis-2.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.32
-    volumes:
-      - ${DOCKER_VOLUME}/redis/server2:/data
-      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
-  redis-3:
-    <<: *redis
-    container_name: redis-3
-    hostname: redis-3.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.33
-    volumes:
-      - ${DOCKER_VOLUME}/redis/server3:/data
-      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
-  redis-4:
-    <<: *redis
-    container_name: redis-4
-    hostname: redis-4.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.34
-    volumes:
-      - ${DOCKER_VOLUME}/redis/server4:/data
-      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
-  redis-5:
-    <<: *redis
-    container_name: redis-5
-    hostname: redis-5.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.35
-    volumes:
-      - ${DOCKER_VOLUME}/redis/server5:/data
-      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
-  redis-6:
-    <<: *redis
-    container_name: redis-6
-    hostname: redis-6.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.36
-    volumes:
-      - ${DOCKER_VOLUME}/redis/server6:/data
-      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ${DOCKER_VOLUME}/rabbit/node3:/var/lib/rabbitmq/mnesia
