@@ -32,7 +32,7 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.69
     volumes:
       - ${DOCKER_CONFIG}/kibana/kibana:/usr/share/kibana/bin/kibana
-      - ${DOCKER_CONFIG}/kibana/kibana.yml:/usr/share/kibana/bin/kibana.yml
+      - ${DOCKER_CONFIG}/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
   elasticsearch-1:
     container_name: elasticsearch-1
     hostname: elasticsearch-1.shit-code.com
