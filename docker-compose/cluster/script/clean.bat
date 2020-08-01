@@ -1,3 +1,5 @@
+
+
 docker network rm cluster-network
 docker rm consul_node_1
 docker rm consul_node_2

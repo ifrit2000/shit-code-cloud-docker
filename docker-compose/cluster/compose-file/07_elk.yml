@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  logstash:
+    container_name: logstash
+    image: ${LOGSTASH_IMAGE}
+    hostname: logstash.shit-code.com
+    extra_hosts:
+      - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.63
+      - elasticsearch-4.shit-code.com:${IP_ADDR_PREFIX}.64
+      - elasticsearch-5.shit-code.com:${IP_ADDR_PREFIX}.65
+      - rabbit-haproxy.shit-code.com:${IP_ADDR_PREFIX}.40
+    command: ["-f","/config/rabbitmq.conf"]
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.61
+    volumes:
+      - ${DOCKER_CONFIG}/logstash/rabbitmq.conf:/config/rabbitmq.conf
+      - ${DOCKER_CONFIG}/logstash/jvm.options:/usr/share/logstash/config/jvm.options
+  kibana:
+    container_name: kibana
+    image: ${KIBANA_IMAGE}
+    hostname: kibana.shit-code.com
+    extra_hosts:
+      - elasticsearch:${IP_ADDR_PREFIX}.62
+    ports:
+      - 5601:5601
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.69
+    volumes:
+      - ${DOCKER_CONFIG}/kibana/kibana:/usr/share/kibana/bin/kibana
+  elasticsearch-1:
+    container_name: elasticsearch-1
+    hostname: elasticsearch-1.shit-code.com
+    image: ${ELASTICSEARCH_IMAGE}
+    ports:
+      - 9200:9200
+    environment:
+      - node.name=elasticsearch-1
+      - discovery.seed_hosts=elasticsearch-2.shit-code.com,elasticsearch-3.shit-code.com
+      - cluster.initial_master_nodes=elasticsearch-1,elasticsearch-2,elasticsearch-3
+      - cluster.name=shit-code-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      &ulimits
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch_volume_1
+    #      - ${DOCKER_CONFIG}/elasticsearch/jvm.options:/usr/share/elasticsearch/config/jvm.options
+    #      - ${DOCKER_VOLUME}/elasticsearch/node1:/usr/share/elasticsearch/data
+    extra_hosts:
+      - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
+      - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
+      - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.63
+  elasticsearch-2:
+    container_name: elasticsearch-2
+    hostname: elasticsearch-2.shit-code.com
+    image: ${ELASTICSEARCH_IMAGE}
+    environment:
+      - node.name=elasticsearch-2
+      - discovery.seed_hosts=elasticsearch-1.shit-code.com,elasticsearch-3.shit-code.com
+      - cluster.initial_master_nodes=elasticsearch-1,elasticsearch-2,elasticsearch-3
+      - cluster.name=shit-code-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      <<: *ulimits
+    volumes:
+      - elasticsearch_volume_2
+    #      - ${DOCKER_CONFIG}/elasticsearch/jvm.options:/usr/share/elasticsearch/config/jvm.options
+    #      - ${DOCKER_VOLUME}/elasticsearch/node2:/usr/share/elasticsearch/data
+    extra_hosts:
+      - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
+      - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
+      - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.64
+  elasticsearch-3:
+    container_name: elasticsearch-3
+    hostname: elasticsearch-3.shit-code.com
+    image: ${ELASTICSEARCH_IMAGE}
+    environment:
+      - node.name=elasticsearch-3
+      - discovery.seed_hosts=elasticsearch-1.shit-code.com,elasticsearch-2.shit-code.com
+      - cluster.initial_master_nodes=elasticsearch-1,elasticsearch-2,elasticsearch-3
+      - cluster.name=shit-code-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      <<: *ulimits
+    volumes:
+      - elasticsearch_volume_3
+    #      - ${DOCKER_CONFIG}/elasticsearch/jvm.options:/usr/share/elasticsearch/config/jvm.options
+    #      - ${DOCKER_VOLUME}/elasticsearch/node3:/usr/share/elasticsearch/data
+    extra_hosts:
+      - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
+      - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
+      - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.65
+
+volumes:
+  elasticsearch_volume_1:
+  elasticsearch_volume_2:
+  elasticsearch_volume_3:
+
+  #
+  #sysctl -p
+#https://www.elastic.co/guide/en/elasticsearch/reference/7.8/docker.html
+#https://www.elastic.co/guide/en/logstash/current/docker.html
+#https://www.elastic.co/guide/en/kibana/current/docker.html
