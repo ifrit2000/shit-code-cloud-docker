@@ -9,7 +9,7 @@ services:
       - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
       - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
       - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
-      - rabbit-haproxy.shit-code.com:${IP_ADDR_PREFIX}.40
+      - rabbit.shit-code.com:${IP_ADDR_PREFIX}.40
 #    command: ["-f","/usr/share/logstash/config/rabbitmq.conf"]
     networks:
       cluster-network:
@@ -123,3 +123,4 @@ volumes:
 #https://www.elastic.co/guide/en/elasticsearch/reference/7.8/docker.html
 #https://www.elastic.co/guide/en/logstash/current/docker.html
 #https://www.elastic.co/guide/en/kibana/current/docker.html
+#https://github.com/mobz/elasticsearch-head#running-with-built-in-server

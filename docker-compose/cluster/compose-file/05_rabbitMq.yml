@@ -4,15 +4,14 @@ services:
   rabbit_haproxy:
     container_name: rabbit-haproxy
     image: ${HAPROXY_IMAGE}
-    hostname: rabbit-haproxy.shit-code.com
+    hostname: rabbit.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.40
-    #    command: ["-f","/usr/local/etc/haproxy/haproxy.cfg"]
     ports:
       - 1080:1080
     volumes:
-      - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ${DOCKER_CONFIG}/haproxy/rabbit.cfg:/usr/local/etc/haproxy/haproxy.cfg
   rabbit-1:
     &rabbitmq
     extra_hosts:
@@ -69,3 +68,6 @@ services:
 #  always (默认值)
 #
 #HA mirror promotion on shutdown
+
+
+#https://github.com/rabbitmq/rabbitmq-server/blob/v3.7.x/docs/rabbitmq.conf.example
