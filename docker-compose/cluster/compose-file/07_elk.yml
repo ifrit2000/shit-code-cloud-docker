@@ -10,12 +10,12 @@ services:
       - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
       - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
       - rabbit-haproxy.shit-code.com:${IP_ADDR_PREFIX}.40
-    command: ["-f","/usr/share/logstash/config/rabbitmq.conf"]
+#    command: ["-f","/usr/share/logstash/config/rabbitmq.conf"]
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.61
     volumes:
-      - ${DOCKER_CONFIG}/logstash/rabbitmq.conf:/usr/share/logstash/config/rabbitmq.conf
+      - ${DOCKER_CONFIG}/logstash/rabbitmq.conf:/usr/share/logstash/pipeline/logstash.conf
       - ${DOCKER_CONFIG}/logstash/jvm.options:/usr/share/logstash/config/jvm.options
       - ${DOCKER_CONFIG}/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
   kibana:
