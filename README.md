@@ -30,6 +30,24 @@ $ docker-compose up
 
 docker rmi `docker images | grep xxxxx | awk '{print $3}'`
 
+# 集群环境
+## env文件
+
+## consul
+
+## mysql
+
+## redis
+
+## rabbitmq
+
+## zipkin
+
+## git2consul
+
+## Prometheus
+
+# 开发环境
 
 
 docker run -dit centos /bin/bash
