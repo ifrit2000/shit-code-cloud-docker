@@ -31,7 +31,7 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.11
     command: ["agent", "-config-dir", "/consul/config"]
     volumes:
-      - ${DOCKER_VOLUME}/consul/node1:/consul/data
+      - consul_volume_1:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
   consul-2:
@@ -42,7 +42,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.12
     volumes:
-      - ${DOCKER_VOLUME}/consul/node2:/consul/data
+      - consul_volume_2:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
   consul-3:
@@ -53,7 +53,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.13
     volumes:
-      - ${DOCKER_VOLUME}/consul/node3:/consul/data
+      - consul_volume_3:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
   git2consul:
@@ -74,3 +74,8 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.19
     volumes:
       - ${DOCKER_CONFIG}/git2consul/config.json:/etc/git2consul.d/config.json
+
+volumes:
+  consul_volume_1:
+  consul_volume_2:
+  consul_volume_3:

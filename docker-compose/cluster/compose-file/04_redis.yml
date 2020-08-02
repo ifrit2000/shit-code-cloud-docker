@@ -19,7 +19,7 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.31
     command: ["/usr/local/etc/redis/redis.conf"]
     volumes:
-      - ${DOCKER_VOLUME}/redis/server1:/data
+      - redis_volume_1:/data
       - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   redis-2:
     <<: *redis
@@ -29,7 +29,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.32
     volumes:
-      - ${DOCKER_VOLUME}/redis/server2:/data
+      - redis_volume_2:/data
       - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   redis-3:
     <<: *redis
@@ -39,7 +39,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.33
     volumes:
-      - ${DOCKER_VOLUME}/redis/server3:/data
+      - redis_volume_3:/data
       - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   redis-4:
     <<: *redis
@@ -49,7 +49,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.34
     volumes:
-      - ${DOCKER_VOLUME}/redis/server4:/data
+      - redis_volume_4:/data
       - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   redis-5:
     <<: *redis
@@ -59,7 +59,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.35
     volumes:
-      - ${DOCKER_VOLUME}/redis/server5:/data
+      - redis_volume_5:/data
       - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   redis-6:
     <<: *redis
@@ -69,7 +69,13 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.36
     volumes:
-      - ${DOCKER_VOLUME}/redis/server6:/data
+      - redis_volume_6:/data
       - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
-
+volumes:
+  redis_volume_1:
+  redis_volume_2:
+  redis_volume_3:
+  redis_volume_4:
+  redis_volume_5:
+  redis_volume_6:
 #  redis-cli --cluster create 172.28.0.31:6379 172.28.0.32:6379 172.28.0.33:6379 172.28.0.34:6379 172.28.0.35:6379 172.28.0.36:6379 --cluster-replicas 1

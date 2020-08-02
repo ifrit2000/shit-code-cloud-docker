@@ -28,7 +28,9 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.41
     volumes:
-      - ${DOCKER_VOLUME}/rabbit/node1:/var/lib/rabbitmq/mnesia
+      - rabbit_data_volume_1:/var/lib/rabbitmq/mnesia
+      - rabbit_log_volume_1:/var/log/rabbitmq
+      - ${DOCKER_CONFIG}/rabbit/rabbit.conf:/etc/rabbitmq/rabbitmq.conf
   rabbit-2:
     depends_on:
       - rabbit-1
@@ -39,7 +41,9 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.42
     volumes:
-      - ${DOCKER_VOLUME}/rabbit/node2:/var/lib/rabbitmq/mnesia
+      - rabbit_data_volume_2:/var/lib/rabbitmq/mnesia
+      - rabbit_log_volume_2:/var/log/rabbitmq
+      - ${DOCKER_CONFIG}/rabbit/rabbit.conf:/etc/rabbitmq/rabbitmq.conf
   rabbit-3:
     depends_on:
       - rabbit-1
@@ -50,8 +54,16 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.43
     volumes:
-      - ${DOCKER_VOLUME}/rabbit/node3:/var/lib/rabbitmq/mnesia
-
+      - rabbit_data_volume_3:/var/lib/rabbitmq/mnesia
+      - rabbit_log_volume_3:/var/log/rabbitmq
+      - ${DOCKER_CONFIG}/rabbit/rabbit.conf:/etc/rabbitmq/rabbitmq.conf
+volumes:
+  rabbit_data_volume_1:
+  rabbit_log_volume_1:
+  rabbit_data_volume_2:
+  rabbit_log_volume_2:
+  rabbit_data_volume_3:
+  rabbit_log_volume_3:
   #  rabbitmqctl stop_app
   #  rabbitmqctl reset
   #  rabbitmqctl join_cluster --ram rabbit@rabbit1
