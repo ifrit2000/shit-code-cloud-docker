@@ -1,19 +1,19 @@
 version: '3.8'
 
 services:
-#  grafana:
-#    container_name: grafana
-#    image: ${GRAFANA_IMAGE}
-#    hostname: grafana.shit-code.com
-#    extra_hosts:
-#      - prometheus.shit-code.com:${IP_ADDR_PREFIX}.71
-#    ports:
-#      - 3000:3000
-#    volumes:
-#      - grafana-storage:/var/lib/grafana
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.70
+  grafana:
+    container_name: grafana
+    image: ${GRAFANA_IMAGE}
+    hostname: grafana.shit-code.com
+    extra_hosts:
+      - prometheus.shit-code.com:${IP_ADDR_PREFIX}.71
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.70
   prometheus:
     container_name: prometheus
     image: ${PROMETHEUS_IMAGE}
