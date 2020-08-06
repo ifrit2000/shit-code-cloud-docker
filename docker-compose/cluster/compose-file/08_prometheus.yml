@@ -32,6 +32,8 @@ services:
     image: ${PROMETHEUS_CONSUL_EXPORTER_IMAGE}
     hostname: prometheus-consul.shit-code.com
     command: ['--consul.server=172.28.0.11:8500']
+    ports:
+      - 9107:9107
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.72
