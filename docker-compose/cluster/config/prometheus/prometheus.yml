@@ -45,23 +45,23 @@ scrape_configs:
         action: keep
 
   ## config for the multiple Redis targets that the exporter will scrape
-#  - job_name: 'redis_exporter_targets'
-#    static_configs:
-#      - targets:
-#          - redis://172.28.0.31:6379
-#          - redis://172.28.0.32:6379
-#          - redis://172.28.0.33:6379
-#          - redis://172.28.0.34:6379
-#          - redis://172.28.0.35:6379
-#          - redis://172.28.0.36:6379
-#    metrics_path: /scrape
-#    relabel_configs:
-#      - source_labels: [__address__]
-#        target_label: __param_target
-#      - source_labels: [__param_target]
-#        target_label: instance
-#      - target_label: __address__
-#        replacement: redis-exporter.shit-code.com:9121
+  - job_name: 'redis_exporter_targets'
+    static_configs:
+      - targets:
+          - redis://172.28.0.31:6379
+          - redis://172.28.0.32:6379
+          - redis://172.28.0.33:6379
+          - redis://172.28.0.34:6379
+          - redis://172.28.0.35:6379
+          - redis://172.28.0.36:6379
+    metrics_path: /scrape
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: redis-exporter.shit-code.com:9121
 
 #  ## config for scraping the exporter itself
 #  - job_name: 'redis_exporter'
