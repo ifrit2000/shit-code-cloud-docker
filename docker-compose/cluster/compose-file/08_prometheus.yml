@@ -23,6 +23,8 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.71
     ports:
     - 9090:9090
+    extra_hosts:
+      - redis-exporter.shit-code.com:${IP_ADDR_PREFIX}.75
     volumes:
       - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 #  prometheus-consul-exporter:
