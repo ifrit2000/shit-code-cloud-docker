@@ -14,26 +14,28 @@ services:
 #    networks:
 #      cluster-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.70
-  prometheus:
-    container_name: prometheus
-    image: ${PROMETHEUS_IMAGE}
-    hostname: prometheus.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.71
-    ports:
-    - 9090:9090
-    extra_hosts:
-      - redis-exporter.shit-code.com:${IP_ADDR_PREFIX}.75
-    volumes:
-      - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-#  prometheus-consul-exporter:
-#    container_name: prometheus-consul-exporter
-#    image: ${PROMETHEUS_CONSUL_EXPORTER_IMAGE}
-#    hostname: prometheus-consul.shit-code.com
+#  prometheus:
+#    container_name: prometheus
+#    image: ${PROMETHEUS_IMAGE}
+#    hostname: prometheus.shit-code.com
 #    networks:
 #      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.72
+#        ipv4_address: ${IP_ADDR_PREFIX}.71
+#    ports:
+#    - 9090:9090
+#    extra_hosts:
+#      - redis-exporter.shit-code.com:${IP_ADDR_PREFIX}.75
+#    volumes:
+#      - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  prometheus-consul-exporter:
+    container_name: prometheus-consul-exporter
+    image: ${PROMETHEUS_CONSUL_EXPORTER_IMAGE}
+    hostname: prometheus-consul.shit-code.com
+    command: ['--consul.server=172.28.0.11:8500']
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.72
+
 #  prometheus-mysql-master-exporter:
 #    container_name: prometheus-mysql-master-exporter
 #    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
@@ -45,6 +47,7 @@ services:
 #    networks:
 #      cluster-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.73
+
 #  prometheus-mysql-slave-exporter:
 #    container_name: prometheus-mysql-slave-exporter
 #    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
@@ -56,6 +59,7 @@ services:
 #    networks:
 #      cluster-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.74
+
 #  prometheus-haprooxy-exporter:
 #    container_name: prometheus-haprooxy-exporter
 #    image: ${PROMETHEUS_HAPROXY_EXPORTER_IMAGE}
@@ -63,14 +67,14 @@ services:
 #    networks:
 #      cluster-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.74
-  redis-exporter:
-    container_name: redis-exporter
-    image: ${REDIS_EXPORTER_IMAGE}
-    hostname: redis-exporter.shit-code.com
-    command: ['-redis.addr','172.28.0.31']
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.75
+#  redis-exporter:
+#    container_name: redis-exporter
+#    image: ${REDIS_EXPORTER_IMAGE}
+#    hostname: redis-exporter.shit-code.com
+#    command: ['-redis.addr','172.28.0.31']
+#    networks:
+#      cluster-network:
+#        ipv4_address: ${IP_ADDR_PREFIX}.75
 volumes:
   grafana-storage:
 
