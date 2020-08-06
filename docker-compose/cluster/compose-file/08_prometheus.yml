@@ -31,7 +31,9 @@ services:
     container_name: prometheus-consul-exporter
     image: ${PROMETHEUS_CONSUL_EXPORTER_IMAGE}
     hostname: prometheus-consul.shit-code.com
-    command: ['--consul.server=172.28.0.11:8500']
+    command: ['--consul.server=consul.shit-code.com:8500']
+    extra_hosts:
+      - consul.shit-code.com:${IP_ADDR_PREFIX}.10
     ports:
       - 9107:9107
     networks:
