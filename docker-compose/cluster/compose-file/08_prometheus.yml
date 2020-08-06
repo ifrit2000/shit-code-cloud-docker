@@ -14,19 +14,20 @@ services:
 #    networks:
 #      cluster-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.70
-#  prometheus:
-#    container_name: prometheus
-#    image: ${PROMETHEUS_IMAGE}
-#    hostname: prometheus.shit-code.com
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.71
-#    ports:
-#    - 9090:9090
-#    extra_hosts:
-#      - redis-exporter.shit-code.com:${IP_ADDR_PREFIX}.75
-#    volumes:
-#      - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  prometheus:
+    container_name: prometheus
+    image: ${PROMETHEUS_IMAGE}
+    hostname: prometheus.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.71
+    ports:
+    - 9090:9090
+    extra_hosts:
+      - prometheus-consul.shit-code.com:${IP_ADDR_PREFIX}.72
+      - redis-exporter.shit-code.com:${IP_ADDR_PREFIX}.75
+    volumes:
+      - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
   prometheus-consul-exporter:
     container_name: prometheus-consul-exporter
     image: ${PROMETHEUS_CONSUL_EXPORTER_IMAGE}
@@ -34,8 +35,6 @@ services:
     command: ['--consul.server=consul.shit-code.com:8500']
     extra_hosts:
       - consul.shit-code.com:${IP_ADDR_PREFIX}.10
-    ports:
-      - 9107:9107
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.72
