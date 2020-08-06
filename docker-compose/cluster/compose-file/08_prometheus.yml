@@ -21,6 +21,8 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.71
+    ports:
+    - 9090:9090
     volumes:
       - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 #  prometheus-consul-exporter:
