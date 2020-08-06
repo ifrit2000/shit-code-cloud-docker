@@ -74,7 +74,7 @@ services:
     container_name: redis-exporter
     image: ${REDIS_EXPORTER_IMAGE}
     hostname: redis-exporter.shit-code.com
-    command: ['-redis.addr']
+    command: ['-redis.addr=']
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.75
@@ -82,6 +82,7 @@ volumes:
   grafana-storage:
 
 #curl -X PUT -d '{"id": "mysql-master","name": "mysql-master","address": "172.28.0.73","port": 9104,"tags": ["test"],"checks": [{"http": "http://172.28.0.73:9104/","interval": "5s"}]}'     http://172.28.0.10:8500/v1/agent/service/register
+#curl -X PUT -d '{"id": "consul-cluster","name": "consul-cluster","address": "172.28.0.72","port": 9107,"tags": ["test"],"checks": [{"http": "http://172.28.0.72:9107/","interval": "5s"}]}'     http://172.28.0.10:8500/v1/agent/service/register
 
 #https://hub.docker.com/r/prom/consul-exporter
 #https://hub.docker.com/r/prom/mysqld-exporter

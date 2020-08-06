@@ -63,8 +63,8 @@ scrape_configs:
       - target_label: __address__
         replacement: redis-exporter.shit-code.com:9121
 
-#  ## config for scraping the exporter itself
-#  - job_name: 'redis_exporter'
-#    static_configs:
-#      - targets:
-#          - redis-exporter.shit-code.com:9121
+  ## config for scraping the exporter itself
+  - job_name: 'redis_exporter'
+    static_configs:
+      - targets:
+          - redis-exporter.shit-code.com:9121
