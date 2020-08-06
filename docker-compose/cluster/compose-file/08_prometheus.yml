@@ -1,19 +1,19 @@
 version: '3.8'
 
 services:
-  grafana:
-    container_name: grafana
-    image: ${GRAFANA_IMAGE}
-    hostname: grafana.shit-code.com
-    extra_hosts:
-      - prometheus.shit-code.com:${IP_ADDR_PREFIX}.71
-    ports:
-      - 3000:3000
-    volumes:
-      - grafana-storage:/var/lib/grafana
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.70
+#  grafana:
+#    container_name: grafana
+#    image: ${GRAFANA_IMAGE}
+#    hostname: grafana.shit-code.com
+#    extra_hosts:
+#      - prometheus.shit-code.com:${IP_ADDR_PREFIX}.71
+#    ports:
+#      - 3000:3000
+#    volumes:
+#      - grafana-storage:/var/lib/grafana
+#    networks:
+#      cluster-network:
+#        ipv4_address: ${IP_ADDR_PREFIX}.70
   prometheus:
     container_name: prometheus
     image: ${PROMETHEUS_IMAGE}
@@ -30,28 +30,28 @@ services:
 #    networks:
 #      cluster-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.72
-  prometheus-mysql-master-exporter:
-    container_name: prometheus-mysql-master-exporter
-    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
-    hostname: prometheus-mysql-master.shit-code.com
-    extra_hosts:
-      - mysql-master.shit-code.com:${IP_ADDR_PREFIX}.21
-    volumes:
-      - ${DOCKER_CONFIG}/prometheus/mysql/master.cnf:/home/.my.cnf
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.73
-  prometheus-mysql-slave-exporter:
-    container_name: prometheus-mysql-slave-exporter
-    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
-    hostname: prometheus-mysql-slave.shit-code.com
-    extra_hosts:
-      - mysql-slave.shit-code.com:${IP_ADDR_PREFIX}.22
-    volumes:
-      - ${DOCKER_CONFIG}/prometheus/mysql/slave.cnf:/home/.my.cnf
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.74
+#  prometheus-mysql-master-exporter:
+#    container_name: prometheus-mysql-master-exporter
+#    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
+#    hostname: prometheus-mysql-master.shit-code.com
+#    extra_hosts:
+#      - mysql-master.shit-code.com:${IP_ADDR_PREFIX}.21
+#    volumes:
+#      - ${DOCKER_CONFIG}/prometheus/mysql/master.cnf:/home/.my.cnf
+#    networks:
+#      cluster-network:
+#        ipv4_address: ${IP_ADDR_PREFIX}.73
+#  prometheus-mysql-slave-exporter:
+#    container_name: prometheus-mysql-slave-exporter
+#    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
+#    hostname: prometheus-mysql-slave.shit-code.com
+#    extra_hosts:
+#      - mysql-slave.shit-code.com:${IP_ADDR_PREFIX}.22
+#    volumes:
+#      - ${DOCKER_CONFIG}/prometheus/mysql/slave.cnf:/home/.my.cnf
+#    networks:
+#      cluster-network:
+#        ipv4_address: ${IP_ADDR_PREFIX}.74
 #  prometheus-haprooxy-exporter:
 #    container_name: prometheus-haprooxy-exporter
 #    image: ${PROMETHEUS_HAPROXY_EXPORTER_IMAGE}
