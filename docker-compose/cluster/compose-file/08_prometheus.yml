@@ -101,3 +101,6 @@ volumes:
 #https://github.com/oliver006/redis_exporter
 #https://github.com/justwatchcom/elasticsearch_exporter
 #https://grafana.com/docs/grafana/latest/installation/docker/
+
+
+#https://grafana.com/grafana/dashboards?search=redis&dataSource=prometheus
