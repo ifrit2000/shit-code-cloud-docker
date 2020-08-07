@@ -22,3 +22,17 @@ networks:
 #      - 1080:1080
 #    volumes:
 #      - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+#
+#services:
+#  haproxy:
+#    container_name: haproxy
+#    image: ${HAPROXY_IMAGE}
+#    hostname: haproxy.shit-code.com
+#    networks:
+#      cluster-network:
+#        ipv4_address: ${IP_ADDR_PREFIX}.40
+#    #    command: ["-f","/usr/local/etc/haproxy/haproxy.cfg"]
+#    ports:
+#      - 1080:1080
+#    volumes:
+#      - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg

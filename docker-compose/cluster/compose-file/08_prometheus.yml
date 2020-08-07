@@ -64,16 +64,7 @@ services:
 #      cluster-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.74
 
-  prometheus-haprooxy-exporter:
-    container_name: prometheus-haprooxy-exporter
-    image: ${PROMETHEUS_HAPROXY_EXPORTER_IMAGE}
-    hostname: prometheus-haproxy.shit-code.com
-    extra_hosts:
-      - consul.shit-code.com:${IP_ADDR_PREFIX}.10
-    command: ['--haproxy.scrape-uri="http://consul.shit-code.com:80/admin?stats;csv"']
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.75
+
   redis-exporter:
     container_name: redis-exporter
     image: ${REDIS_EXPORTER_IMAGE}
@@ -89,6 +80,16 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.75
+  prometheus-haprooxy-exporter:
+    container_name: prometheus-haprooxy-exporter
+    image: ${PROMETHEUS_HAPROXY_EXPORTER_IMAGE}
+    hostname: prometheus-haproxy.shit-code.com
+    extra_hosts:
+      - consul.shit-code.com:${IP_ADDR_PREFIX}.10
+    command: ['--haproxy.scrape-uri="http://consul.shit-code.com:80/admin?stats;csv"']
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.76
 volumes:
   grafana-storage:
 
