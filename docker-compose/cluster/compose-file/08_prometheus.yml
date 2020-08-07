@@ -70,7 +70,7 @@ services:
     hostname: prometheus-haproxy.shit-code.com
     extra_hosts:
       - consul.shit-code.com
-    command: ['--haproxy.scrape-uri="http://localhost:80/admin?stats;csv"']
+    command: ['--haproxy.scrape-uri="http://consul.shit-code.com:80/admin?stats;csv"']
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.75
