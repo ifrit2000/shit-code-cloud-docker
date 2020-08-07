@@ -69,7 +69,7 @@ services:
     image: ${PROMETHEUS_HAPROXY_EXPORTER_IMAGE}
     hostname: prometheus-haproxy.shit-code.com
     extra_hosts:
-      - consul.shit-code.com
+      - consul.shit-code.com:${IP_ADDR_PREFIX}.10
     command: ['--haproxy.scrape-uri="http://consul.shit-code.com:80/admin?stats;csv"']
     networks:
       cluster-network:
