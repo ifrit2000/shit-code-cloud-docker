@@ -63,7 +63,7 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        #export 抓取请求会到export上
+        #export 实际抓取请求会到export上,上面配置的target会变成请求参数
         replacement: redis-exporter.shit-code.com:9121
 
   ## config for scraping the exporter itself
