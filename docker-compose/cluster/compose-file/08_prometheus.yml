@@ -25,6 +25,7 @@ services:
     - 9090:9090
     extra_hosts:
       - prometheus-consul.shit-code.com:${IP_ADDR_PREFIX}.72
+      - consul.shit-code.com:${IP_ADDR_PREFIX}.10
       - redis-exporter.shit-code.com:${IP_ADDR_PREFIX}.75
     volumes:
       - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
