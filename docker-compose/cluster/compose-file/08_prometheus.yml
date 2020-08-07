@@ -71,14 +71,14 @@ services:
 #    networks:
 #      cluster-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.74
-#  redis-exporter:
-#    container_name: redis-exporter
-#    image: ${REDIS_EXPORTER_IMAGE}
-#    hostname: redis-exporter.shit-code.com
+  redis-exporter:
+    container_name: redis-exporter
+    image: ${REDIS_EXPORTER_IMAGE}
+    hostname: redis-exporter.shit-code.com
 #    command: ['-redis.addr','172.28.0.71']
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.75
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.75
 volumes:
   grafana-storage:
 
