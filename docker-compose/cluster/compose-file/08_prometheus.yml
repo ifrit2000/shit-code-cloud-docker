@@ -53,18 +53,17 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.73
 
-#  prometheus-mysql-slave-exporter:
-#    container_name: prometheus-mysql-slave-exporter
-#    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
-#    hostname: prometheus-mysql-slave.shit-code.com
-#    extra_hosts:
-#      - mysql-slave.shit-code.com:${IP_ADDR_PREFIX}.22
-#    volumes:
-#      - ${DOCKER_CONFIG}/prometheus/mysql/slave.cnf:/home/.my.cnf
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.74
-
+  prometheus-mysql-slave-exporter:
+    container_name: prometheus-mysql-slave-exporter
+    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
+    hostname: prometheus-mysql-slave.shit-code.com
+    extra_hosts:
+      - mysql-slave.shit-code.com:${IP_ADDR_PREFIX}.22
+    volumes:
+      - ${DOCKER_CONFIG}/prometheus/mysql/slave.cnf:/home/.my.cnf
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.74
 
   redis-exporter:
     container_name: redis-exporter

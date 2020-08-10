@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  rabbit_haproxy:
-    container_name: rabbit-haproxy
-    image: ${HAPROXY_IMAGE}
-    hostname: rabbit.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.40
-    ports:
-      - 1080:1080
-    volumes:
-      - ${DOCKER_CONFIG}/haproxy/rabbit.cfg:/usr/local/etc/haproxy/haproxy.cfg
   rabbit-1:
     &rabbitmq
     extra_hosts:

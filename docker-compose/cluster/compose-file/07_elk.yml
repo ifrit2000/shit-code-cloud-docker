@@ -9,7 +9,7 @@ services:
       - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
       - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
       - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
-      - rabbit.shit-code.com:${IP_ADDR_PREFIX}.40
+      - rabbit.shit-code.com:${IP_ADDR_PREFIX}.10
 #    command: ["-f","/usr/share/logstash/config/rabbitmq.conf"]
     networks:
       cluster-network:

@@ -9,30 +9,24 @@ networks:
       config:
         - subnet: ${IP_ADDR_PREFIX}.0/16
 
-#services:
-#  haproxy:
-#    container_name: rabbit-haproxy
-#    image: ${HAPROXY_IMAGE}
-#    hostname: rabbit-haproxy.shit-code.com
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.40
-#    #    command: ["-f","/usr/local/etc/haproxy/haproxy.cfg"]
-#    ports:
-#      - 1080:1080
-#    volumes:
-#      - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-#
-#services:
-#  haproxy:
-#    container_name: haproxy
-#    image: ${HAPROXY_IMAGE}
-#    hostname: haproxy.shit-code.com
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.40
-#    #    command: ["-f","/usr/local/etc/haproxy/haproxy.cfg"]
-#    ports:
-#      - 1080:1080
-#    volumes:
-#      - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+services:
+  consul_haproxy:
+    extra_hosts:
+      - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+      - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
+      - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
+      - rabbit-1.shit-code.com:${IP_ADDR_PREFIX}.41
+      - rabbit-2.shit-code.com:${IP_ADDR_PREFIX}.42
+      - rabbit-3.shit-code.com:${IP_ADDR_PREFIX}.43
+    container_name: consul-haproxy
+    image: ${HAPROXY_IMAGE}
+    hostname: haproxy.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.10
+    ports:
+      - 8500:8500
+      - 15672:15672
+      - 12345:12345
+    volumes:
+      - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
