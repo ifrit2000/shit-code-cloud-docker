@@ -28,7 +28,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.41
     volumes:
-      - rabbit_data_volume_1:/var/lib/rabbitmq/mnesia
+      - rabbit_data_volume_1:/var/lib/rabbitmq
       - rabbit_log_volume_1:/var/log/rabbitmq
       - ${DOCKER_CONFIG}/rabbit/rabbit.conf:/etc/rabbitmq/rabbitmq.conf
   rabbit-2:
@@ -41,7 +41,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.42
     volumes:
-      - rabbit_data_volume_2:/var/lib/rabbitmq/mnesia
+      - rabbit_data_volume_2:/var/lib/rabbitmq
       - rabbit_log_volume_2:/var/log/rabbitmq
       - ${DOCKER_CONFIG}/rabbit/rabbit.conf:/etc/rabbitmq/rabbitmq.conf
   rabbit-3:
@@ -54,7 +54,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.43
     volumes:
-      - rabbit_data_volume_3:/var/lib/rabbitmq/mnesia
+      - rabbit_data_volume_3:/var/lib/rabbitmq
       - rabbit_log_volume_3:/var/log/rabbitmq
       - ${DOCKER_CONFIG}/rabbit/rabbit.conf:/etc/rabbitmq/rabbitmq.conf
 volumes:

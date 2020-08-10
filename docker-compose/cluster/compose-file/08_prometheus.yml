@@ -28,6 +28,7 @@ services:
       - consul.shit-code.com:${IP_ADDR_PREFIX}.10
       - redis-exporter.shit-code.com:${IP_ADDR_PREFIX}.75
     volumes:
+      - prometheus-volume:/prometheus
       - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
   prometheus-consul-exporter:
     container_name: prometheus-consul-exporter
@@ -40,17 +41,17 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.72
 
-#  prometheus-mysql-master-exporter:
-#    container_name: prometheus-mysql-master-exporter
-#    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
-#    hostname: prometheus-mysql-master.shit-code.com
-#    extra_hosts:
-#      - mysql-master.shit-code.com:${IP_ADDR_PREFIX}.21
-#    volumes:
-#      - ${DOCKER_CONFIG}/prometheus/mysql/master.cnf:/home/.my.cnf
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.73
+  prometheus-mysql-master-exporter:
+    container_name: prometheus-mysql-master-exporter
+    image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
+    hostname: prometheus-mysql-master.shit-code.com
+    extra_hosts:
+      - mysql-master.shit-code.com:${IP_ADDR_PREFIX}.21
+    volumes:
+      - ${DOCKER_CONFIG}/prometheus/mysql/master.cnf:/home/.my.cnf
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.73
 
 #  prometheus-mysql-slave-exporter:
 #    container_name: prometheus-mysql-slave-exporter
@@ -92,6 +93,7 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.76
 volumes:
   grafana-storage:
+  prometheus-volume:
 
 #curl -X PUT -d '{"id": "mysql-master","name": "mysql-master","address": "172.28.0.73","port": 9104,"tags": ["test"],"checks": [{"http": "http://172.28.0.73:9104/","interval": "5s"}]}'     http://172.28.0.10:8500/v1/agent/service/register
 #curl -X PUT -d '{"id": "consul-cluster","name": "consul-cluster","address": "172.28.0.72","port": 9107,"tags": ["test"],"checks": [{"http": "http://172.28.0.72:9107/","interval": "5s"}]}'     http://172.28.0.10:8500/v1/agent/service/register
