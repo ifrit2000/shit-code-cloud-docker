@@ -10,7 +10,7 @@ services:
       - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
       - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
       - rabbit.shit-code.com:${IP_ADDR_PREFIX}.10
-#    command: ["-f","/usr/share/logstash/config/rabbitmq.conf"]
+    #    command: ["-f","/usr/share/logstash/config/rabbitmq.conf"]
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.61
@@ -117,8 +117,8 @@ volumes:
   elasticsearch_volume_2:
   elasticsearch_volume_3:
 
-#/etc/sysctl.cnf
-    #vm.max_map_count = 262144
+  #/etc/sysctl.cnf
+  #vm.max_map_count = 262144
   #sysctl -p
 #https://www.elastic.co/guide/en/elasticsearch/reference/7.8/docker.html
 #https://www.elastic.co/guide/en/logstash/current/docker.html

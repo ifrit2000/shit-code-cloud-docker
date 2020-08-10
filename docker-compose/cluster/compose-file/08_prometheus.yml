@@ -22,18 +22,18 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.71
     ports:
-    - 9090:9090
+      - 9090:9090
     extra_hosts:
-      - prometheus-consul.shit-code.com:${IP_ADDR_PREFIX}.72
+      - consul-exporter.shit-code.com:${IP_ADDR_PREFIX}.72
       - consul.shit-code.com:${IP_ADDR_PREFIX}.10
       - redis-exporter.shit-code.com:${IP_ADDR_PREFIX}.75
     volumes:
       - prometheus-volume:/prometheus
       - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-  prometheus-consul-exporter:
-    container_name: prometheus-consul-exporter
+  consul-exporter:
+    container_name: consul-exporter
     image: ${PROMETHEUS_CONSUL_EXPORTER_IMAGE}
-    hostname: prometheus-consul.shit-code.com
+    hostname: consul-exporter.shit-code.com
     command: ['--consul.server=consul.shit-code.com:8500']
     extra_hosts:
       - consul.shit-code.com:${IP_ADDR_PREFIX}.10
@@ -41,10 +41,10 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.72
 
-  prometheus-mysql-master-exporter:
-    container_name: prometheus-mysql-master-exporter
+  mysql-master-exporter:
+    container_name: mysql-master-exporter
     image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
-    hostname: prometheus-mysql-master.shit-code.com
+    hostname: mysql-master-exporter.shit-code.com
     extra_hosts:
       - mysql-master.shit-code.com:${IP_ADDR_PREFIX}.21
     volumes:
@@ -53,10 +53,10 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.73
 
-  prometheus-mysql-slave-exporter:
-    container_name: prometheus-mysql-slave-exporter
+  mysql-slave-exporter:
+    container_name: mysql-slave-exporter
     image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
-    hostname: prometheus-mysql-slave.shit-code.com
+    hostname: mysql-slave.shit-code.com
     extra_hosts:
       - mysql-slave.shit-code.com:${IP_ADDR_PREFIX}.22
     volumes:
@@ -76,20 +76,55 @@ services:
       - redis-4.shit-code.com:${IP_ADDR_PREFIX}.34
       - redis-5.shit-code.com:${IP_ADDR_PREFIX}.35
       - redis-6.shit-code.com:${IP_ADDR_PREFIX}.36
-#    command: ['-redis.addr','172.28.0.71']
+    #    command: ['-redis.addr','172.28.0.71']
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.75
-  prometheus-haprooxy-exporter:
-    container_name: prometheus-haprooxy-exporter
+  haprooxy-exporter:
+    container_name: haprooxy-exporter
     image: ${PROMETHEUS_HAPROXY_EXPORTER_IMAGE}
-    hostname: prometheus-haproxy.shit-code.com
+    hostname: haproxy.shit-code.com
     extra_hosts:
-      - consul.shit-code.com:${IP_ADDR_PREFIX}.10
+      - haproxy.shit-code.com:${IP_ADDR_PREFIX}.10
     command: ['--haproxy.scrape-uri=http://admin:admin@consul.shit-code.com/admin?stats;csv']
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.76
+  rabbit-exporter:
+    extra_hosts:
+      - rabbit-1.shit-code.com:${IP_ADDR_PREFIX}.41
+      - rabbit-2.shit-code.com:${IP_ADDR_PREFIX}.42
+      - rabbit-3.shit-code.com:${IP_ADDR_PREFIX}.43
+    container_name: rabbit-exporter
+    image: ${PROMETHEUS_RABBIT_EXPORTER_IMAGE}
+    hostname: rabbit-exporter.shit-code.com
+    command: ["-config-file","conf/rabbit.conf"]
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.77
+    volumes:
+      - ${DOCKER_CONFIG}/prometheus/rabbit/rabbit.conf:/conf/rabbit.conf
+  elasticsearch-exporter:
+    extra_hosts:
+      - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
+      - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
+      - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
+    container_name: elasticsearch-exporter
+    image: ${PROMETHEUS_ELASTICSEARCH_EXPORTER_IMAGE}
+    hostname: elasticsearch-exporter.shit-code.com
+    command:
+      - '--es.uri=http://elasticsearch-1.shit-code.com:9200'
+      - '--es.all'
+      - '--es.cluster_settings'
+      - '--es.indices'
+      - '--es.indices_settings'
+      - '--es.shards'
+      - '--es.snapshots'
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.78
+    volumes:
+      - ${DOCKER_CONFIG}/prometheus/rabbit/rabbit.conf:/conf/rabbit.conf
 volumes:
   grafana-storage:
   prometheus-volume:
