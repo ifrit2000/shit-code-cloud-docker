@@ -14,6 +14,7 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.70
+
   prometheus:
     container_name: prometheus
     image: ${PROMETHEUS_IMAGE}
@@ -30,6 +31,7 @@ services:
     volumes:
       - prometheus-volume:/prometheus
       - ${DOCKER_CONFIG}/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
   consul-exporter:
     container_name: consul-exporter
     image: ${PROMETHEUS_CONSUL_EXPORTER_IMAGE}
@@ -80,6 +82,7 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.75
+
   haprooxy-exporter:
     container_name: haprooxy-exporter
     image: ${PROMETHEUS_HAPROXY_EXPORTER_IMAGE}
@@ -90,6 +93,7 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.76
+
   rabbit-exporter:
     extra_hosts:
       - rabbit-1.shit-code.com:${IP_ADDR_PREFIX}.41
@@ -104,6 +108,7 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.77
     volumes:
       - ${DOCKER_CONFIG}/prometheus/rabbit/rabbit.conf:/conf/rabbit.conf
+
   elasticsearch-exporter:
     extra_hosts:
       - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
