@@ -1,7 +1,7 @@
 FROM openjdk:11
 MAINTAINER Anthony
 
-ARG CONSUL_VERSION=1.8.0
+ARG CONSUL_VERSION=1.8.2
 
 ARG HASHICORP_RELEASES=https://releases.hashicorp.com
 
