@@ -96,3 +96,4 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.19
     volumes:
       - ${DOCKER_CONFIG}/git2consul/config.json:/etc/git2consul.d/config.json
+    restart: always
