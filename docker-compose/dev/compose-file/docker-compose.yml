@@ -73,6 +73,8 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
+    links:
+      - consul
   nginx:
     container_name: nginx
     image: ${NGINX_IMAGE}
