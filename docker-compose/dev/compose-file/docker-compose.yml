@@ -84,9 +84,7 @@ services:
       - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
   git2consul:
     depends_on:
-      - consul-1
-      - consul-2
-      - consul-3
+      - consul
     container_name: git2consul
     image: cimpress/git2consul
     hostname: git2consul.shit-code.com
