@@ -64,6 +64,8 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.41
+    volumes:
+    - ${DOCKER_VOLUME}/rabbit:/var/lib/rabbitmq
   zipkin:
     container_name: zipkin
     image: ${ZIPKIN_IMAGE}
