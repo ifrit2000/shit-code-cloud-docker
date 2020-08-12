@@ -65,6 +65,7 @@ services:
   zipkin:
     depends_on:
       - mysql
+      - rabbit
     container_name: zipkin
     image: ${ZIPKIN_IMAGE}
     hostname: zipkin.shit-code.com
@@ -85,6 +86,7 @@ services:
       - RABBIT_USER=guest
       - RABBIT_PASSWORD=guest
 #      - JAVA_OPTS=-Dlogging.level.zipkin2=DEBUG
+    restart: always
   nginx:
     container_name: nginx
     image: ${NGINX_IMAGE}
