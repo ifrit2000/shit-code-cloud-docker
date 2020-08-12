@@ -16,4 +16,5 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.52
 
+#https://hub.docker.com/r/openzipkin/zipkin-dependencies
 #https://github.com/openzipkin/zipkin/blob/master/zipkin-server/src/main/resources/zipkin-server-shared.yml
