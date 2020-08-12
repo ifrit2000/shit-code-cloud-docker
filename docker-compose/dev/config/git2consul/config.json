@@ -17,11 +17,11 @@
   },
   "repos": [
     {
-      "name": "standalone",
+      "name": "dev",
       "url": "https://github.com/cd871127/shit-code-cloud-infrastructure.git",
       "include_branch_name": false,
-      "ignore_repo_name": false,
-      "source_root": "config/standalone/",
+      "ignore_repo_name": true,
+      "source_root": "config/dev/",
       "mountpoint": "config",
       "branches": [
         "dev"
