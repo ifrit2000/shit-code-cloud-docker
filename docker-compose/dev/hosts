@@ -1,0 +1,7 @@
+consul.shit-code.com 172.28.0.11
+mysql.shit-code.com 172.28.0.21
+redis.shit-code.com 172.28.0.31
+rabbit.shit-code.com 172.28.0.41
+zipkin.shit-code.com 172.28.0.51
+nginx.shit-code.com 172.28.0.61
+cloud.shit-code.com 127.0.0.1

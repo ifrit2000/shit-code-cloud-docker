@@ -34,3 +34,5 @@ EXPOSE 8300
 EXPOSE 8301 8301/udp 8302 8302/udp
 
 EXPOSE 8500 8600 8600/udp
+
+#docker build -f jdk11AndConsul1.8.0.Dockerfile -t cd871127/container:jdk11-consul1.8.2 .

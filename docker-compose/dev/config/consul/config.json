@@ -9,7 +9,7 @@
   "bind_addr": "0.0.0.0",
   "rejoin_after_leave": true,
   "retry_join": [
-    "consul-standalone.shit-code.com"
+    "consul.shit-code.com"
   ],
   "retry_interval": "5s",
   "reconnect_timeout": "72h"

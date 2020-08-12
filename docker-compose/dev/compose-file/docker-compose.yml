@@ -9,25 +9,13 @@ networks:
       config:
         - subnet: ${IP_ADDR_PREFIX}.0/16
 
-x-hosts:
-  &default-hosts
-  extra_hosts:
-    - consul-standalone.shit-code.com:${IP_ADDR_PREFIX}.11
-    - redis-standalone.shit-code.com:${IP_ADDR_PREFIX}.31
-    - nginx-standalone.shit-code.com:${IP_ADDR_PREFIX}.92
-    - mysql-standalone.shit-code.com:${IP_ADDR_PREFIX}.21
-    - rabbit-standalone.shit-code.com:${IP_ADDR_PREFIX}.41
-    - zipkin-standalone.shit-code.com:${IP_ADDR_PREFIX}.51
-    - admin-standalone.shit-code.com:${IP_ADDR_PREFIX}.101
-    - gateway-standalone.shit-code.com:${IP_ADDR_PREFIX}.111
-
-
 services:
-  consul-standalone:
-    <<: *default-hosts
+  consul:
     container_name: consul
     image: ${CONSUL_IMAGE}
-    hostname: consul-standalone.shit-code.com
+    hostname: consul.shit-code.com
+    ports:
+      - 8500:8500
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.11
@@ -36,24 +24,10 @@ services:
       - ${DOCKER_VOLUME}/consul/node1:/consul/data
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/server.json:/consul/config/server.json
-  redis:
-    <<: *default-hosts
-    container_name: redis
-    image: ${REDIS_IMAGE}
-    hostname: redis-standalone.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.31
-    ports:
-      - 6379:6379
-    volumes:
-      - ${DOCKER_VOLUME}/redis:/data
-      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   mysql:
-    <<: *default-hosts
     container_name: mysql
     image: ${MYSQL_IMAGE}
-    hostname: mysql-standalone.shit-code.com
+    hostname: mysql.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.21
@@ -64,11 +38,22 @@ services:
     volumes:
       - ${DOCKER_CONFIG}/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - ${DOCKER_VOLUME}/mysql:/var/lib/mysql
+  redis:
+    container_name: redis
+    image: ${REDIS_IMAGE}
+    hostname: redis.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.31
+    ports:
+      - 6379:6379
+    volumes:
+      - ${DOCKER_VOLUME}/redis:/data
+      - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
   rabbit:
-    <<: *default-hosts
     container_name: rabbit
     image: ${RABBITMQ_IMAGE}
-    hostname: rabbit-standalone.shit-code.com
+    hostname: rabbit.shit-code.com
     ports:
       - 4369:4369
       - 5671:5671
@@ -80,24 +65,22 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.41
   zipkin:
-    <<: *default-hosts
     container_name: zipkin
     image: ${ZIPKIN_IMAGE}
-    hostname: zipkin-standalone.shit-code.com
+    hostname: zipkin.shit-code.com
     ports:
       - 9411:9411
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
   nginx:
-    <<: *default-hosts
     container_name: nginx
     image: ${NGINX_IMAGE}
-    hostname: nginx-standalone.shit-code.com
+    hostname: nginx.shit-code.com
     ports:
       - 80:80
     networks:
       cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.92
+        ipv4_address: ${IP_ADDR_PREFIX}.61
     volumes:
       - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
