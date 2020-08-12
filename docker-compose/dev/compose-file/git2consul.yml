@@ -6,8 +6,6 @@ networks:
 
 services:
   git2consul:
-    depends_on:
-      - consul
     container_name: git2consul
     image: cimpress/git2consul
     hostname: git2consul.shit-code.com
