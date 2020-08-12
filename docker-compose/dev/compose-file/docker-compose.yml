@@ -78,10 +78,10 @@ services:
       - mysql.shit-code.com:${IP_ADDR_PREFIX}.21
       - rabbit.shit-code.com:${IP_ADDR_PREFIX}.41
     environment:
-      - STORAGE_TYPE=mysql
-      - MYSQL_HOST=mysql.shit-code.com
-      - MYSQL_USER=root
-      - MYSQL_PASS=123456
+#      - STORAGE_TYPE=mysql
+#      - MYSQL_HOST=mysql.shit-code.com
+#      - MYSQL_USER=root
+#      - MYSQL_PASS=123456
       - RABBIT_ADDRESSES=rabbit.shit-code.com:5672
       - RABBIT_USER=guest
       - RABBIT_PASSWORD=guest
