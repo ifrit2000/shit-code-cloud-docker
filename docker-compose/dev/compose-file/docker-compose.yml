@@ -87,6 +87,7 @@ services:
       - RABBIT_PASSWORD=guest
 #      - JAVA_OPTS=-Dlogging.level.zipkin2=DEBUG
     restart: always
+    #https://raw.githubusercontent.com/openzipkin/zipkin/master/zipkin-storage/mysql-v1/src/main/resources/mysql.sql
   nginx:
     container_name: nginx
     image: ${NGINX_IMAGE}
