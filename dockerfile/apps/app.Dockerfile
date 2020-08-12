@@ -3,7 +3,7 @@ ARG GIT_BRANCH
 FROM app-base:tmp
 MAINTAINER Anthony
 
-FROM cd871127/container:0.0.2
+FROM cd871127/container:jdk11-consul1.8.2
 MAINTAINER Anthony
 ARG GIT_POSTFIX
 ARG APP_NAME

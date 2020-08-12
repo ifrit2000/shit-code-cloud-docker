@@ -1,4 +1,4 @@
-FROM gradle:6.5.1-jdk11
+FROM gradle:6.6.0-jdk11
 MAINTAINER Anthony
 ARG GIT_POSTFIX
 ARG GIT_BRANCH
