@@ -55,12 +55,8 @@ services:
     image: ${RABBITMQ_IMAGE}
     hostname: rabbit.shit-code.com
     ports:
-      - 4369:4369
-      - 5671:5671
       - 5672:5672
-      - 15671:15671
       - 15672:15672
-      - 25672:25672
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.41
