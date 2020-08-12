@@ -7,11 +7,6 @@
       {
         "level": "trace",
         "stream": "process.stdout"
-      },
-      {
-        "level": "debug",
-        "type": "rotating-file",
-        "path": "/var/log/git2consul/git2consul.log"
       }
     ]
   },

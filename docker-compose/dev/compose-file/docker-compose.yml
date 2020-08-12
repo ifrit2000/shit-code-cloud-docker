@@ -83,18 +83,18 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.61
     volumes:
       - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
-  git2consul:
-    depends_on:
-      - consul
-    container_name: git2consul
-    image: cimpress/git2consul
-    hostname: git2consul.shit-code.com
-    command: ['--endpoint','consul.shit-code.com','--port','8500','--config-file','/etc/git2consul.d/config.json']
-    extra_hosts:
-      - consul.shit-code.com:${IP_ADDR_PREFIX}.11
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.19
-    volumes:
-      - ${DOCKER_CONFIG}/git2consul/config.json:/etc/git2consul.d/config.json
-    restart: always
+#  git2consul:
+#    depends_on:
+#      - consul
+#    container_name: git2consul
+#    image: cimpress/git2consul
+#    hostname: git2consul.shit-code.com
+#    command: ['--endpoint','consul.shit-code.com','--port','8500','--config-file','/etc/git2consul.d/config.json']
+#    extra_hosts:
+#      - consul.shit-code.com:${IP_ADDR_PREFIX}.11
+#    networks:
+#      cluster-network:
+#        ipv4_address: ${IP_ADDR_PREFIX}.19
+#    volumes:
+#      - ${DOCKER_CONFIG}/git2consul/config.json:/etc/git2consul.d/config.json
+#    restart: always
