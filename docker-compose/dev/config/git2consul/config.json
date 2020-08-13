@@ -34,7 +34,7 @@
       ]
     },
     {
-      "name": "dev",
+      "name": "common",
       "url": "https://github.com/cd871127/shit-code-cloud-infrastructure.git",
       "include_branch_name": false,
       "ignore_repo_name": true,
