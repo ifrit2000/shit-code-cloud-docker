@@ -1,4 +1,4 @@
-
+#docker rmi --force $(docker images | grep none | awk '{print $3}')
 
 docker network rm cluster-network
 docker rm consul_node_1
