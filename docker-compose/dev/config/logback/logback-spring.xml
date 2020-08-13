@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-
     <springProperty scope="context" name="LOG_PATH" source="logging.file.path"/>
     <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
 
@@ -69,7 +68,7 @@
         </root>
     </springProfile>
 
-    <springProfile name="prd">
+    <springProfile name="prod">
         <property name="MAX_HISTORY" value="30"/>
         <property name="MAX_SIZE" value="256MB"/>
         <property name="FILE_LOG_PATTERN"
