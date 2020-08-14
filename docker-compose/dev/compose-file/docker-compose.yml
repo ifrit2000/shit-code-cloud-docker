@@ -117,7 +117,7 @@ services:
   git2consul-common:
     depends_on:
       - consul
-    container_name: git2consul
+    container_name: git2consul-common
     image: cimpress/git2consul
     hostname: git2consul-common.shit-code.com
     command: ['--endpoint','consul.shit-code.com','--port','8500','--config-file','/etc/git2consul.d/config.json']
