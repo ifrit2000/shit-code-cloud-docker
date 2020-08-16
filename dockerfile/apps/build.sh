@@ -17,3 +17,5 @@ for APP_NAME in ${APP_NAMES[*]}; do
   docker build --no-cache --build-arg APP_NAME=${APP_NAME} --build-arg GIT_POSTFIX=${GIT_POSTFIX} -f app.Dockerfile -t cd871127/${JAR_NAME}:dev .
 done
 #docker rmi ${TMP_IMAGE}
+#docker build --no-cache --build-arg GIT_BRANCH=dev --build-arg GIT_POSTFIX=infrastructure -f base.Dockerfile -t app-base:tmp .
+#docker build --no-cache --build-arg APP_NAME=admin --build-arg GIT_POSTFIX=infrastructure -f app.Dockerfile -t cd871127/infrastructure-admin:dev .
