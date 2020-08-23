@@ -1,0 +1,111 @@
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.shit.code.cloud.**.dao.dto
+  mapper-locations: classpath:sql-map/*.xml
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    # Hikari 连接池配置
+    hikari:
+      # 最小空闲连接数量
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: HikariCP
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  flyway:
+    #脚本编码 默认UTF-8
+    encoding: UTF-8
+    #是否检查迁移脚本位置是否存在 默认true
+    check-location: true
+    #迁移脚本的位置 默认classpath:db/migration
+    locations:
+      - classpath:db/migration
+    #      - ${shitcode.flyway.targetLocation}
+    #链接重试次数 默认0
+    connect-retries: 0
+    #设定需要flyway迁移的schema，大小写敏感 默认为连接默认的schema
+    schemas: ['flyway_schema_history']
+#    schemas: ['flyway_schema']
+#    defaultSchema: 'flyway_schema'
+    #flyway使用的元数据表名 默认flyway_schema_history
+    table: ${spring.application.name}_schema_history
+#    table: flyway_schema_history
+    #Tablespace in which the schema history table is created
+    #tablespace:
+    #baseline描述 默认 << Flyway Baseline >>
+    baseline-description: '<< Flyway Baseline >>'
+    #baseline版本
+    baseline-version: 0
+    #历史表里面记录的名字
+    installed-by: Anthony
+    #占位符
+    placeholders:
+      test: 333
+    #占位符前缀 默认${
+    placeholder-prefix: '${'
+    #占位符后缀 }
+    placeholder-suffix: '}'
+    #是否替换占位符 默认true
+    placeholder-replacement: true
+    #迁移脚本前缀
+    sql-migration-prefix: V
+    #迁移脚本后缀
+    sql-migration-suffixes: ['.sql']
+    #迁移脚本文件名分隔符
+    sql-migration-separator: __
+    #可重复执行的脚本前缀
+    repeatable-sql-migration-prefix: R
+    #迁移时使用的目标版本
+    #target:
+    #迁移时用的jdbc,不设置就是默认数据源
+    #url:
+    #user:
+    #password:
+    #当初始化好连接时要执行的SQL
+    #init-sqls:
+    #当迁移时发现目标schema非空，而且带有没有元数据的表时，是否自动执行基准迁移，默认false
+    baseline-on-migrate: false
+    #是否清空db
+    clean-disabled: true
+    #当发现校验错误时是否自动调用clean
+    clean-on-validation-error: false
+    #是否把所有pending迁移放在一个事务里面
+    group: false
+    #当读取元数据表时是否忽略缺失的迁移
+    ignore-missing-migrations: false
+    #当读取元数据表时是否忽略忽略的迁移
+    ignore-ignored-migrations: false
+    #当读取元数据表时是否忽略pending的迁移
+    ignore-pending-migrations: false
+    #当读取元数据表时是否忽略未来的迁移
+    ignore-future-migrations: false
+    #是否允许混合事务和非事务的迁移
+    mixed: false
+    #是否允许乱序
+    out-of-order: false
+    #是否只有自定义的callback才执行
+    skip-default-callbacks: false
+    #是否只有自定义的resolver才执行
+    skip-default-resolvers: false
+    #迁移时是否自动调用校验
+    validate-on-migrate: true
+    #下面的配置需要专业版
+    #batch: false
+    #error-overrides: []
+    #license-key: 1
+    #oracle-sqlplus: false
+    #oracle-sqlplus-warn: false
+    #stream: false

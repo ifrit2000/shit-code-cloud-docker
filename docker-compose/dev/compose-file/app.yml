@@ -7,43 +7,47 @@ networks:
 x-hosts:
   &default-hosts
   extra_hosts:
-    - consul-standalone.shit-code.com:${IP_ADDR_PREFIX}.11
-    - redis-standalone.shit-code.com:${IP_ADDR_PREFIX}.31
-    - nginx-standalone.shit-code.com:${IP_ADDR_PREFIX}.92
-    - mysql-standalone.shit-code.com:${IP_ADDR_PREFIX}.21
-    - rabbit-standalone.shit-code.com:${IP_ADDR_PREFIX}.41
-    - zipkin-standalone.shit-code.com:${IP_ADDR_PREFIX}.51
-    - admin-standalone.shit-code.com:${IP_ADDR_PREFIX}.101
-    - gateway-standalone.shit-code.com:${IP_ADDR_PREFIX}.111
+    - consul.shit-code.com:${IP_ADDR_PREFIX}.11
+    - redis.shit-code.com:${IP_ADDR_PREFIX}.31
+    - nginx.shit-code.com:${IP_ADDR_PREFIX}.61
+    - mysql.shit-code.com:${IP_ADDR_PREFIX}.21
+    - rabbit.shit-code.com:${IP_ADDR_PREFIX}.41
+    - zipkin.shit-code.com:${IP_ADDR_PREFIX}.51
+    - admin.shit-code.com:${IP_ADDR_PREFIX}.101
+    - gateway.shit-code.com:${IP_ADDR_PREFIX}.111
 
 services:
   admin:
     <<: *default-hosts
     container_name: admin
     image: ${ADMIN_IMAGE}
-    hostname: admin-standalone.shit-code.com
+    hostname: admin.shit-code.com
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.101
     environment:
-      - PROFILE=standalone
+      - PROFILE=dev
+      - CLASSPATH=.:/app:/usr/local/openjdk-11/lib
     volumes:
       - ${DOCKER_VOLUME}/infrastructure/logs/admin1:/app/log
-      - ${DOCKER_CONFIG}/infrastructure/config/admin:/app/config
+#      - ${DOCKER_CONFIG}/app/infrastructure/admin/config:/app/config
+      - ${DOCKER_CONFIG}/app/infrastructure/admin/config/application.yml:/app/config/application.yml
+      - ${DOCKER_CONFIG}/app/infrastructure/admin/config/bootstrap.yml:/app/config/bootstrap.yml
+      - ${DOCKER_CONFIG}/app/common/config:/app/config
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
-  gateway:
-    <<: *default-hosts
-    container_name: gateway
-    image: ${GATEWAY_IMAGE}
-    hostname: gateway-standalone.shit-code.com
-    networks:
-      cluster-network:
-        ipv4_address: ${IP_ADDR_PREFIX}.111
-    environment:
-      - PROFILE=standalone
-    volumes:
-      - ${DOCKER_VOLUME}/infrastructure/logs/gateway1:/app/log
-      - ${DOCKER_CONFIG}/infrastructure/config/gateway:/app/config
-      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
+#  gateway:
+#    <<: *default-hosts
+#    container_name: gateway
+#    image: ${GATEWAY_IMAGE}
+#    hostname: gateway.shit-code.com
+#    networks:
+#      cluster-network:
+#        ipv4_address: ${IP_ADDR_PREFIX}.111
+#    environment:
+#      - PROFILE=standalone
+#    volumes:
+#      - ${DOCKER_VOLUME}/infrastructure/logs/gateway1:/app/log
+#      - ${DOCKER_CONFIG}/infrastructure/config/gateway:/app/config
+#      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+#      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json

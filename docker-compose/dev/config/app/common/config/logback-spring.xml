@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="10 seconds" debug="false">
+<!--    <springProperty scope="context" name="NGINX_HOST" source="shitcode.env.nginx.host"/>-->
+    <include url="http://172.28.0.61/logback-spring.xml"/>
+<!--    <include url="http://${NGINX_HOST}/logback-spring.xml"/>-->
+</configuration>

@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    consul:
+      host: 172.28.0.11
+  rabbitmq:
+    port: 5672
+    username: guest
+    password: guest
+    addresses: 172.28.0.41
+#  security:
+#    user:
+#      name: admin
+#      password: admin1
+  output:
+    ansi:
+      enabled: always
+logging:
+  file:
+    path: /app/log

@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: infrastructure-admin
+  profiles:
+    include: consul,common
