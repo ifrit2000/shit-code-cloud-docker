@@ -1,6 +1,7 @@
-boot:
-  admin:
-    client:
-      auto-deregistration: true
-      instance:
-        prefer-ip: true
+spring:
+  boot:
+    admin:
+      client:
+        auto-deregistration: true
+        instance:
+          prefer-ip: true

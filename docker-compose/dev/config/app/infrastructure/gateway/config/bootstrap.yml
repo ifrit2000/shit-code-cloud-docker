@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: infrastructure-gateway
+  profiles:
+    include: consul,database,admin,common,redis
