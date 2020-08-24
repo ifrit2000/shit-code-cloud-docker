@@ -25,6 +25,8 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.101
+    ports:
+    - 8080
     environment:
       - PROFILE=dev
     volumes:
