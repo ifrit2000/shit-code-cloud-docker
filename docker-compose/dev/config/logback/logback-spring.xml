@@ -58,6 +58,9 @@
         <logger name="org.apache.shiro" level="DEBUG">
             <appender-ref ref="CONSOLE"/>
         </logger>
+        <logger name="com.shit.code.cloud.mybatis.log.SqlLogInterceptor" level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
         <logger name="com.shit_code.cloud.lib.springboot.database.sql" level="INFO">
             <appender-ref ref="CONSOLE"/>
         </logger>
