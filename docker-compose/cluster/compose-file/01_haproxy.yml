@@ -21,3 +21,14 @@ services:
       - 12345:12345
     volumes:
       - ${DOCKER_CONFIG}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+  nginx:
+    container_name: nginx
+    image: ${NGINX_IMAGE}
+    hostname: nginx.shit-code.com
+    ports:
+      - 80:80
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.9
+    volumes:
+      - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml

@@ -1,0 +1,16 @@
+spring:
+  rabbitmq:
+    port: 5672
+    username: guest
+    password: guest
+    addresses: rabbit.shit-code.com
+#  security:
+#    user:
+#      name: admin
+#      password: admin1
+  output:
+    ansi:
+      enabled: always
+logging:
+  file:
+    path: /app/log
