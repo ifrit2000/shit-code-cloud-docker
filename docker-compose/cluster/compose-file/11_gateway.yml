@@ -10,14 +10,18 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.111
     extra_hosts:
+      - nginx.shit-code.com:${IP_ADDR_PREFIX}.9
+      - rabbit.shit-code.com:${IP_ADDR_PREFIX}.10
       - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
       - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
       - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
       - admin-1.shit-code.com:${IP_ADDR_PREFIX}.101
       - admin-2.shit-code.com:${IP_ADDR_PREFIX}.102
+      - redis-1.shit-code.com:${IP_ADDR_PREFIX}.31
+      - mysql-master.shit-code.com:${IP_ADDR_PREFIX}.21
     volumes:
       - ${DOCKER_VOLUME}/infrastructure/logs/gateway1:/app/log
-      - ${DOCKER_CONFIG}/infrastructure/config/gateway:/app/config
+      - ${DOCKER_CONFIG}/apps:/app/config
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
   gateway-2:
@@ -29,7 +33,7 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.112
     volumes:
       - ${DOCKER_VOLUME}/infrastructure/logs/gateway2:/app/log
-      - ${DOCKER_CONFIG}/infrastructure/config/gateway:/app/config
+      - ${DOCKER_CONFIG}/apps:/app/config
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
 

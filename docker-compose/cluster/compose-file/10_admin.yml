@@ -15,21 +15,23 @@ services:
       - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
       - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
       - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
+      - admin-1.shit-code.com:${IP_ADDR_PREFIX}.101
+      - admin-2.shit-code.com:${IP_ADDR_PREFIX}.102
     volumes:
       - ${DOCKER_VOLUME}/infrastructure/logs/admin1:/app/log
       - ${DOCKER_CONFIG}/apps:/app/config
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
-#  admin-2:
-#    <<: *admin
-#    container_name: admin-2
-#    hostname: admin-2.shit-code.com
-#    networks:
-#      cluster-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.102
-#    volumes:
-#      - ${DOCKER_VOLUME}/infrastructure/logs/admin2:/app/log
-#      - ${DOCKER_CONFIG}/infrastructure/config/admin:/app/config
-#      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-#      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
+  admin-2:
+    <<: *admin
+    container_name: admin-2
+    hostname: admin-2.shit-code.com
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.102
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/admin2:/app/log
+      - ${DOCKER_CONFIG}/apps:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
 
