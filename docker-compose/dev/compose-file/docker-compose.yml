@@ -2,8 +2,8 @@ version: '3.8'
 
 #创建一个网络
 networks:
-  cluster-network:
-    name: cluster-network
+  dev-network:
+    name: dev-network
     ipam:
       driver: default
       config:
@@ -17,7 +17,7 @@ services:
     ports:
       - 8500:8500
     networks:
-      cluster-network:
+      dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.11
     command: ["agent",  "-config-dir", "/consul/config"]
     volumes:
@@ -29,7 +29,7 @@ services:
     image: ${MYSQL_IMAGE}
     hostname: mysql.shit-code.com
     networks:
-      cluster-network:
+      dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.21
     ports:
       - 3306:3306
@@ -43,7 +43,7 @@ services:
     image: ${REDIS_IMAGE}
     hostname: redis.shit-code.com
     networks:
-      cluster-network:
+      dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.31
     ports:
       - 6379:6379
@@ -58,7 +58,7 @@ services:
       - 5672:5672
       - 15672:15672
     networks:
-      cluster-network:
+      dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.41
     volumes:
       - ${DOCKER_VOLUME}/rabbit:/var/lib/rabbitmq
@@ -72,7 +72,7 @@ services:
     ports:
       - 9411:9411
     networks:
-      cluster-network:
+      dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
     extra_hosts:
       - mysql.shit-code.com:${IP_ADDR_PREFIX}.21
@@ -95,7 +95,7 @@ services:
     ports:
       - 80:80
     networks:
-      cluster-network:
+      dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.61
     volumes:
       - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
@@ -109,7 +109,7 @@ services:
     extra_hosts:
       - consul.shit-code.com:${IP_ADDR_PREFIX}.11
     networks:
-      cluster-network:
+      dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.71
     volumes:
       - ${DOCKER_CONFIG}/git2consul/config.json:/etc/git2consul.d/config.json

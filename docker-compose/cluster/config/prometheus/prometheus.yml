@@ -32,11 +32,11 @@ scrape_configs:
     consul_sd_configs:
       - server: 'consul.shit-code.com:8500'
         services: []
-#      - server: '172.28.0.11:8500'
+#      - server: '172.28.2.11:8500'
 #        services: []
-#      - server: '172.28.0.12:8500'
+#      - server: '172.28.2.12:8500'
 #        services: []
-#      - server: '172.28.0.13:8500'
+#      - server: '172.28.2.13:8500'
 #        services: []
       # https://blog.csdn.net/aixiaoyang168/article/details/103022342
       #https://prometheus.io/docs/prometheus/latest/configuration/configuration/#consul_sd_config

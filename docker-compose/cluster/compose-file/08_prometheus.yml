@@ -78,7 +78,7 @@ services:
       - redis-4.shit-code.com:${IP_ADDR_PREFIX}.34
       - redis-5.shit-code.com:${IP_ADDR_PREFIX}.35
       - redis-6.shit-code.com:${IP_ADDR_PREFIX}.36
-    #    command: ['-redis.addr','172.28.0.71']
+    #    command: ['-redis.addr','172.28.2.71']
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.75
@@ -134,11 +134,11 @@ volumes:
   grafana-storage:
   prometheus-volume:
 
-#curl -X PUT -d '{"id": "mysql-master","name": "mysql-master","address": "172.28.0.73","port": 9104,"tags": ["test"],"checks": [{"http": "http://172.28.0.73:9104/","interval": "5s"}]}'     http://172.28.0.10:8500/v1/agent/service/register
-#curl -X PUT -d '{"id": "consul-cluster","name": "consul-cluster","address": "172.28.0.72","port": 9107,"tags": ["test"],"checks": [{"http": "http://172.28.0.72:9107/","interval": "5s"}]}'     http://172.28.0.10:8500/v1/agent/service/register
-#curl -X PUT -d '{"id": "redis-exporter","name": "redis-exporter1","address": "172.28.0.75","port": 9121,"tags": ["test"],"checks": [{"http": "http://172.28.0.75:9121/","interval": "5s"}]}'     http://172.28.0.10:8500/v1/agent/service/register
+#curl -X PUT -d '{"id": "mysql-master","name": "mysql-master","address": "172.28.2.73","port": 9104,"tags": ["test"],"checks": [{"http": "http://172.28.2.73:9104/","interval": "5s"}]}'     http://172.28.2.10:8500/v1/agent/service/register
+#curl -X PUT -d '{"id": "consul-cluster","name": "consul-cluster","address": "172.28.2.72","port": 9107,"tags": ["test"],"checks": [{"http": "http://172.28.2.72:9107/","interval": "5s"}]}'     http://172.28.2.10:8500/v1/agent/service/register
+#curl -X PUT -d '{"id": "redis-exporter","name": "redis-exporter1","address": "172.28.2.75","port": 9121,"tags": ["test"],"checks": [{"http": "http://172.28.2.75:9121/","interval": "5s"}]}'     http://172.28.2.10:8500/v1/agent/service/register
 
-#curl -X PUT -d '{"id": "redis-1","name": "redis-1","address": "172.28.0.31","port": 6379,"tags": ["test"],"checks": [{"http": "http://172.28.0.31:6379/","interval": "5s"}]}'     http://172.28.0.10:8500/v1/agent/service/register
+#curl -X PUT -d '{"id": "redis-1","name": "redis-1","address": "172.28.2.31","port": 6379,"tags": ["test"],"checks": [{"http": "http://172.28.2.31:6379/","interval": "5s"}]}'     http://172.28.2.10:8500/v1/agent/service/register
 
 #https://hub.docker.com/r/prom/consul-exporter
 #https://hub.docker.com/r/prom/mysqld-exporter

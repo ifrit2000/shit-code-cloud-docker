@@ -1,7 +1,7 @@
 version: '3.8'
 
 networks:
-  cluster-network:
+  dev-network:
     external: true
 
 x-hosts:
@@ -23,7 +23,7 @@ services:
     image: ${ADMIN_IMAGE}
     hostname: admin.shit-code.com
     networks:
-      cluster-network:
+      dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.101
     ports:
     - 8080
@@ -44,7 +44,7 @@ services:
 #    image: ${GATEWAY_IMAGE}
 #    hostname: gateway.shit-code.com
 #    networks:
-#      cluster-network:
+#      dev-network:
 #        ipv4_address: ${IP_ADDR_PREFIX}.111
 #    environment:
 #      - PROFILE=dev

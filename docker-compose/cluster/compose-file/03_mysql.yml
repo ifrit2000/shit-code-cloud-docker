@@ -43,8 +43,8 @@ volumes:
 # sudo grep 'GENERATED ROOT PASSWORD' /var/lib/mysql/mysql_master.log
 # master
 #  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourPassword';
-# CREATE USER 'slave'@'172.28.0.22' IDENTIFIED WITH mysql_native_password BY '123456';
-# GRANT REPLICATION SLAVE ON *.* TO 'slave'@'172.28.0.22';
+# CREATE USER 'slave'@'172.28.2.22' IDENTIFIED WITH mysql_native_password BY '123456';
+# GRANT REPLICATION SLAVE ON *.* TO 'slave'@'172.28.2.22';
 # CREATE USER 'username'@'host' IDENTIFIED WITH mysql_native_password BY 'password';
 # GRANT Create,drop,insert,update,delete ON *.* TO 'username'@'host';
 # show master status;
@@ -52,7 +52,7 @@ volumes:
 # flush privileges;
 
 # slave
-# CHANGE MASTER TO MASTER_HOST='172.28.0.21',MASTER_USER='slave',MASTER_PASSWORD='123456',MASTER_LOG_FILE='master_binlog.000003',MASTER_LOG_POS=1221;
+# CHANGE MASTER TO MASTER_HOST='172.28.2.21',MASTER_USER='slave',MASTER_PASSWORD='123456',MASTER_LOG_FILE='master_binlog.000003',MASTER_LOG_POS=1221;
 # show slave status\G
 
 #  CREATE USER 'exporter'@'%' IDENTIFIED BY '123456';

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #consul的地址
-CONSUL_ADDRESS="172.28.0.11:8500"
+CONSUL_ADDRESS="172.28.2.11:8500"
 
 test -d logs || mkdir logs
 
