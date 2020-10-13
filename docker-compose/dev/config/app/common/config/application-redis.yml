@@ -1,3 +1,0 @@
-spring:
-  redis:
-    client-name: ${spring.application.name}_${spring.cloud.client.ip-address}
