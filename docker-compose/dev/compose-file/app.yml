@@ -36,22 +36,22 @@ services:
       - ${DOCKER_CONFIG}/app/common/config:/app/config
       - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
       - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
-#  gateway:
-#    depends_on:
-#      - admin
-#    <<: *default-hosts
-#    container_name: gateway
-#    image: ${GATEWAY_IMAGE}
-#    hostname: gateway.shit-code.com
-#    networks:
-#      dev-network:
-#        ipv4_address: ${IP_ADDR_PREFIX}.111
-#    environment:
-#      - PROFILE=dev
-#    volumes:
-#      - ${DOCKER_VOLUME}/infrastructure/logs/gateway:/app/log
-#      - ${DOCKER_CONFIG}/app/infrastructure/gateway/config/application.yml:/app/application.yml
-#      - ${DOCKER_CONFIG}/app/infrastructure/gateway/config/bootstrap.yml:/app/bootstrap.yml
-#      - ${DOCKER_CONFIG}/app/common/config:/app/config
-#      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
-#      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
+  gateway:
+    depends_on:
+      - admin
+    <<: *default-hosts
+    container_name: gateway
+    image: ${GATEWAY_IMAGE}
+    hostname: gateway.shit-code.com
+    networks:
+      dev-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.111
+    environment:
+      - PROFILE=dev
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/gateway:/app/log
+      - ${DOCKER_CONFIG}/app/infrastructure/gateway/config/application.yml:/app/application.yml
+      - ${DOCKER_CONFIG}/app/infrastructure/gateway/config/bootstrap.yml:/app/bootstrap.yml
+      - ${DOCKER_CONFIG}/app/common/config:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
