@@ -1,7 +1,6 @@
 #!/bin/bash
 
 cd $1
-cd ../compose-file
 docker-compose \
 -f 00_network.yml \
 -f 01_haproxy.yml \
