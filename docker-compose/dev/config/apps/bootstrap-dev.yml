@@ -26,3 +26,5 @@ shit:
 logging:
   file:
     path: /app/log
+server:
+  port: 8080
