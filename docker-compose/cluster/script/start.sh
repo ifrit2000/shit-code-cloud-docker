@@ -12,4 +12,4 @@ docker-compose \
 -f 06_zipkin.yml \
 -f 07_elk.yml \
 -f 08_prometheus.yml \
-up
+up -d
