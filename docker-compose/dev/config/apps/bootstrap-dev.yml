@@ -7,13 +7,22 @@ spring:
     username: guest
     password: guest
     addresses: 172.28.0.41
-#  security:
+  zipkin:
+    base-url: 172.28.0.51:8080
+  #  security:
 #    user:
 #      name: admin
 #      password: admin1
   output:
     ansi:
       enabled: always
+
+shit:
+  code:
+    mybatis:
+      sql:
+        #打印完整sql日志
+        assemble: true
 logging:
   file:
     path: /app/log
