@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd $1
+cd ../compose-file
 docker-compose \
 -f 00_network.yml \
 -f 01_haproxy.yml \
@@ -10,5 +11,5 @@ docker-compose \
 -f 05_rabbitMq.yml \
 -f 06_zipkin.yml \
 -f 07_elk.yml \
--f 08_promitheus.yml \
+-f 08_prometheus.yml \
 up
