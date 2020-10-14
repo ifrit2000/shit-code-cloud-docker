@@ -55,7 +55,7 @@
         </encoder>
     </appender>
 
-    <springProfile name="dev">
+    <springProfile name="dev1">
 
         <logger name="org.apache.shiro" level="DEBUG">
             <appender-ref ref="CONSOLE"/>
@@ -73,7 +73,7 @@
         </root>
     </springProfile>
 
-    <springProfile name="cluster">
+    <springProfile name="dev">
         <property name="MAX_HISTORY" value="30"/>
         <property name="MAX_SIZE" value="256MB"/>
         <property name="FILE_LOG_PATTERN"
