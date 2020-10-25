@@ -1,7 +1,7 @@
 rem  windows需要添加路由到vEthernet (Default Switch) 网卡的地址，ipconfig查看
 rem route add 172.28.2.0/16 mask 255.255.255.0 192.168.240.129 -p
 rem docker-compose -f compose/01_network.yml -f compose/02_consul.yml up
-
+rem linux 添加路由sudo route add -net 172.28.2.0 netmask 255.255.255.0 gw 192.168.2.222
 for /l %%i in (1,1,3) do mkdir volume\consul\node%%i\data
 for /l %%i in (1,1,6) do mkdir volume\redis\node%%i\data
 mkdir volume\mysql\master
