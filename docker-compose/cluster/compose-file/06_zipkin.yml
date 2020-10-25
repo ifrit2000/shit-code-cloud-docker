@@ -2,20 +2,26 @@ version: '3.8'
 
 services:
   zipkin_1:
+    &zipkin
     container_name: zipkin-1
     image: ${ZIPKIN_IMAGE}
     hostname: zipkin-1.shit-code.com
+    extra_hosts:
+      - rabbit-1.shit-code.com:${IP_ADDR_PREFIX}.41
+      - rabbit-2.shit-code.com:${IP_ADDR_PREFIX}.42
+      - rabbit-3.shit-code.com:${IP_ADDR_PREFIX}.43
     environment:
       - TZ=${TIME_ZONE}
+      - RABBIT_ADDRESSES=rabbit-1.shit-code.com:5672,rabbit-2.shit-code.com:5672,rabbit-3.shit-code.com:5672
+      - RABBIT_USER=guest
+      - RABBIT_PASSWORD=guest
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
   zipkin_2:
+    <<: *zipkin
     container_name: zipkin-2
-    image: ${ZIPKIN_IMAGE}
     hostname: zipkin-2.shit-code.com
-    environment:
-      - TZ=${TIME_ZONE}
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.52
