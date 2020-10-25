@@ -38,7 +38,7 @@
 
         <declareExchange>true</declareExchange>
         <exchangeType>topic</exchangeType>
-        <exchangeName>log.topic.exchange</exchangeName>
+        <exchangeName>shit_code.log.exchange</exchangeName>
         <routingKeyPattern>log.${APP_NAME}</routingKeyPattern>
         <generateId>true</generateId>
         <charset>UTF-8</charset>
