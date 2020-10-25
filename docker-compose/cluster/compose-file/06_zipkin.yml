@@ -5,6 +5,8 @@ services:
     container_name: zipkin-1
     image: ${ZIPKIN_IMAGE}
     hostname: zipkin-1.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
@@ -12,6 +14,8 @@ services:
     container_name: zipkin-2
     image: ${ZIPKIN_IMAGE}
     hostname: zipkin-2.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.52

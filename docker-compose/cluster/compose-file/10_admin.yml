@@ -6,6 +6,8 @@ services:
     container_name: admin-1
     image: ${ADMIN_IMAGE}
     hostname: admin-1.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     restart: always
     networks:
       cluster-network:

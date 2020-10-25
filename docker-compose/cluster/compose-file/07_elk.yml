@@ -5,6 +5,8 @@ services:
     container_name: logstash
     image: ${LOGSTASH_IMAGE}
     hostname: logstash.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     extra_hosts:
       - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
       - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
@@ -22,6 +24,8 @@ services:
     container_name: kibana
     image: ${KIBANA_IMAGE}
     hostname: kibana.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     extra_hosts:
       - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
       - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
@@ -39,6 +43,7 @@ services:
     hostname: elasticsearch-1.shit-code.com
     image: ${ELASTICSEARCH_IMAGE}
     environment:
+      - TZ=${TIME_ZONE}
       - node.name=elasticsearch-1
       - discovery.seed_hosts=elasticsearch-2.shit-code.com,elasticsearch-3.shit-code.com
       - cluster.initial_master_nodes=elasticsearch-1,elasticsearch-2,elasticsearch-3
@@ -66,6 +71,7 @@ services:
     hostname: elasticsearch-2.shit-code.com
     image: ${ELASTICSEARCH_IMAGE}
     environment:
+      - TZ=${TIME_ZONE}
       - node.name=elasticsearch-2
       - discovery.seed_hosts=elasticsearch-1.shit-code.com,elasticsearch-3.shit-code.com
       - cluster.initial_master_nodes=elasticsearch-1,elasticsearch-2,elasticsearch-3
@@ -90,6 +96,7 @@ services:
     hostname: elasticsearch-3.shit-code.com
     image: ${ELASTICSEARCH_IMAGE}
     environment:
+      - TZ=${TIME_ZONE}
       - node.name=elasticsearch-3
       - discovery.seed_hosts=elasticsearch-1.shit-code.com,elasticsearch-2.shit-code.com
       - cluster.initial_master_nodes=elasticsearch-1,elasticsearch-2,elasticsearch-3

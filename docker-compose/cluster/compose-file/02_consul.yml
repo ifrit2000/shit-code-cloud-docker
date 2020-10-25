@@ -4,6 +4,8 @@ version: '3.8'
 services:
   consul-1:
     &consul
+    environment:
+      - TZ=${TIME_ZONE}
     extra_hosts:
       - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
       - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12

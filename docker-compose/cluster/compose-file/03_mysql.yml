@@ -14,6 +14,7 @@ services:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.21
     environment:
+      - TZ=${TIME_ZONE}
       - MYSQL_ROOT_PASSWORD=123456
     #      - MYSQL_RANDOM_ROOT_PASSWORD=yes
     volumes:

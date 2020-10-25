@@ -6,6 +6,8 @@ services:
     container_name: gateway-1
     image: ${GATEWAY_IMAGE}
     hostname: gateway-1.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     restart: always
     networks:
       cluster-network:

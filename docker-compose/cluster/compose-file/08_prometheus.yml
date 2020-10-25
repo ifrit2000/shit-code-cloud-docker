@@ -5,6 +5,8 @@ services:
     container_name: grafana
     image: ${GRAFANA_IMAGE}
     hostname: grafana.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     extra_hosts:
       - prometheus.shit-code.com:${IP_ADDR_PREFIX}.71
     ports:
@@ -19,6 +21,8 @@ services:
     container_name: prometheus
     image: ${PROMETHEUS_IMAGE}
     hostname: prometheus.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.71
@@ -34,6 +38,8 @@ services:
     container_name: consul-exporter
     image: ${PROMETHEUS_CONSUL_EXPORTER_IMAGE}
     hostname: consul-exporter.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     command: ['--consul.server=consul.shit-code.com:8500']
     extra_hosts:
       - consul.shit-code.com:${IP_ADDR_PREFIX}.10
@@ -45,6 +51,8 @@ services:
     container_name: mysql-master-exporter
     image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
     hostname: mysql-master-exporter.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     extra_hosts:
       - mysql-master.shit-code.com:${IP_ADDR_PREFIX}.21
     volumes:
@@ -57,6 +65,8 @@ services:
     container_name: mysql-slave-exporter
     image: ${PROMETHEUS_MYSQL_EXPORTER_IMAGE}
     hostname: mysql-slave.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     extra_hosts:
       - mysql-slave.shit-code.com:${IP_ADDR_PREFIX}.22
     volumes:
@@ -69,6 +79,8 @@ services:
     container_name: redis-exporter
     image: ${REDIS_EXPORTER_IMAGE}
     hostname: redis-exporter.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     extra_hosts:
       - redis-1.shit-code.com:${IP_ADDR_PREFIX}.31
       - redis-2.shit-code.com:${IP_ADDR_PREFIX}.32
@@ -85,6 +97,8 @@ services:
     container_name: haprooxy-exporter
     image: ${PROMETHEUS_HAPROXY_EXPORTER_IMAGE}
     hostname: haproxy.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     extra_hosts:
       - haproxy.shit-code.com:${IP_ADDR_PREFIX}.10
     command: ['--haproxy.scrape-uri=http://admin:admin@consul.shit-code.com/admin?stats;csv']
@@ -100,6 +114,8 @@ services:
     container_name: rabbit-exporter
     image: ${PROMETHEUS_RABBIT_EXPORTER_IMAGE}
     hostname: rabbit-exporter.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     command: ["-config-file","conf/rabbit.conf"]
     networks:
       cluster-network:
@@ -115,6 +131,8 @@ services:
     container_name: elasticsearch-exporter
     image: ${PROMETHEUS_ELASTICSEARCH_EXPORTER_IMAGE}
     hostname: elasticsearch-exporter.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
     command:
       - '--es.uri=http://elasticsearch-1.shit-code.com:9200'
       - '--es.all'

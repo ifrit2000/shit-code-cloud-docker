@@ -12,6 +12,7 @@ services:
     hostname: rabbit-1.shit-code.com
     privileged: true
     environment:
+      - TZ=${TIME_ZONE}
       - RABBITMQ_ERLANG_COOKIE=rabbitcookie
     networks:
       cluster-network:
