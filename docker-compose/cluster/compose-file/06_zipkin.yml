@@ -10,12 +10,17 @@ services:
       - rabbit-1.shit-code.com:${IP_ADDR_PREFIX}.41
       - rabbit-2.shit-code.com:${IP_ADDR_PREFIX}.42
       - rabbit-3.shit-code.com:${IP_ADDR_PREFIX}.43
+      - elasticsearch-1.shit-code.com:${IP_ADDR_PREFIX}.63
+      - elasticsearch-2.shit-code.com:${IP_ADDR_PREFIX}.64
+      - elasticsearch-3.shit-code.com:${IP_ADDR_PREFIX}.65
     environment:
       - TZ=${TIME_ZONE}
       - RABBIT_ADDRESSES=rabbit-1.shit-code.com:5672,rabbit-2.shit-code.com:5672,rabbit-3.shit-code.com:5672
       - RABBIT_USER=guest
       - RABBIT_PASSWORD=guest
       - RABBIT_VIRTUAL_HOST=/
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=elasticsearch-1.shit-code.com:9200,elasticsearch-2.shit-code.com:9200,elasticsearch-3.shit-code.com:9200
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
