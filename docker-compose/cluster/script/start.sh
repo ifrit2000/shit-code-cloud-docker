@@ -13,3 +13,9 @@ docker-compose \
 -f 07_elk.yml \
 -f 08_prometheus.yml \
 up -d
+
+docker-compose \
+-f 00_network.yml \
+-f 10_admin.yml \
+-f 11_gateway.yml \
+up -d
