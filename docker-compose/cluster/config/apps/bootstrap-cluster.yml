@@ -4,8 +4,6 @@ spring:
     username: guest
     password: guest
     addresses: rabbit.shit-code.com
-  zipkin:
-    base-url: 123
   #  security:
 #    user:
 #      name: admin
