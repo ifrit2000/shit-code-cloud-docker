@@ -1,6 +1,0 @@
-spring:
-  boot:
-    admin:
-      discovery:
-        ignored-services: consul
-  #        services: ['infrastructure-gateway']

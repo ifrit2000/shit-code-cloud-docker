@@ -46,15 +46,17 @@
         <deliveryMode>NON_PERSISTENT</deliveryMode>
     </appender>
 
-    <springProfile name="dev">
-        <property name="CONSOLE_LOG_PATTERN"
-                  value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-15.15thread] [%X{X-B3-TraceId:-}] %highlight(%-5level) %-64.64(%logger{32}#%method:%line) - %msg%n"/>
-        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-            <encoder>
-                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-                <charset>utf8</charset>
-            </encoder>
-        </appender>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-15.15thread] [%X{X-B3-TraceId:-}] %highlight(%-5level) %-64.64(%logger{32}#%method:%line) - %msg%n"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <springProfile name="dev1">
+
         <logger name="org.apache.shiro" level="DEBUG">
             <appender-ref ref="CONSOLE"/>
         </logger>
@@ -71,7 +73,7 @@
         </root>
     </springProfile>
 
-    <springProfile name="prod">
+    <springProfile name="dev">
         <property name="MAX_HISTORY" value="30"/>
         <property name="MAX_SIZE" value="256MB"/>
         <property name="FILE_LOG_PATTERN"
@@ -161,22 +163,28 @@
             </filter>
         </appender>
 
-        <appender name="ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
-            <queueSize>128</queueSize>
-            <discardingThreshold>5</discardingThreshold>
-            <includeCallerData>false</includeCallerData>
-            <maxFlushTime>300</maxFlushTime>
-            <neverBlock>false</neverBlock>
+        <!--       TODO 异步打不出日志-->
+        <!--        <appender name="ASYNC_APPENDER" class="ch.qos.logback.classic.AsyncAppender">-->
+        <!--            <queueSize>128</queueSize>-->
+        <!--            <discardingThreshold>5</discardingThreshold>-->
+        <!--            <includeCallerData>false</includeCallerData>-->
+        <!--            <maxFlushTime>300</maxFlushTime>-->
+        <!--            <neverBlock>false</neverBlock>-->
 
+        <!--            <appender-ref ref="DEBUG_FILE"/>-->
+        <!--            <appender-ref ref="INFO_FILE"/>-->
+        <!--            <appender-ref ref="WARN_FILE"/>-->
+        <!--            <appender-ref ref="ERROR_FILE"/>-->
+        <!--        </appender>-->
+
+        <root level="INFO">
+            <appender-ref ref="RABBIT_APPENDER"/>
+            <!--            <appender-ref ref="ASYNC_APPENDER"/>-->
             <appender-ref ref="DEBUG_FILE"/>
             <appender-ref ref="INFO_FILE"/>
             <appender-ref ref="WARN_FILE"/>
             <appender-ref ref="ERROR_FILE"/>
-        </appender>
-
-        <root level="INFO">
-            <appender-ref ref="RABBIT_APPENDER"/>
-            <appender-ref ref="ASYNC_APPENDER"/>
+            <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
 
