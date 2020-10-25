@@ -15,6 +15,7 @@ services:
       - RABBIT_ADDRESSES=rabbit-1.shit-code.com:5672,rabbit-2.shit-code.com:5672,rabbit-3.shit-code.com:5672
       - RABBIT_USER=guest
       - RABBIT_PASSWORD=guest
+      - RABBIT_VIRTUAL_HOST=/
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
