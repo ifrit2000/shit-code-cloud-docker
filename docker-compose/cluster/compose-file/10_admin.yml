@@ -6,6 +6,7 @@ services:
     container_name: admin-1
     image: ${ADMIN_IMAGE}
     hostname: admin-1.shit-code.com
+    restart: always
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.101
