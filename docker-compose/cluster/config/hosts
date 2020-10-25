@@ -1,20 +1,21 @@
 consul-1.shit-code.com
 consul-2.shit-code.com
 consul-3.shit-code.com
-
-mysql-master-1.shit-code.com
-mysql-slave-1.shit-code.com
-mysql-master-2.shit-code.com
-mysql-slave-2.shit-code.com
-
-redis-1.shit-code.com
-redis-2.shit-code.com
-redis-3.shit-code.com
-redis-4.shit-code.com
-redis-5.shit-code.com
-redis-6.shit-code.com
-
-rabbit.shit-code.com
-rabbit-1.shit-code.com
-rabbit-2.shit-code.com
-rabbit-3.shit-code.com
+172.28.2.9 nginx.shit-code.com
+172.28.2.10 rabbit.shit-code.com
+172.28.2.10 consul.shit-code.com
+172.28.2.11 consul-1.shit-code.com
+172.28.2.12 consul-2.shit-code.com
+172.28.2.13 consul-3.shit-code.com
+172.28.2.31 redis-1.shit-code.com
+172.28.2.32 redis-2.shit-code.com
+172.28.2.33 redis-3.shit-code.com
+172.28.2.34 redis-4.shit-code.com
+172.28.2.35 redis-5.shit-code.com
+172.28.2.36 redis-6.shit-code.com
+172.28.2.21 mysql-master.shit-code.com
+172.28.2.22 mysql-slave.shit-code.com
+172.28.2.101 admin-1.shit-code.com
+172.28.2.102 admin-2.shit-code.com
+172.28.2.111 gateway-1.shit-code.com
+172.28.2.112 gateway-2.shit-code.com
