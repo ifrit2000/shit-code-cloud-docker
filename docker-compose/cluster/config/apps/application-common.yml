@@ -1,4 +1,6 @@
 spring:
+  jackson:
+    time-zone: GMT+8
   main:
     allow-bean-definition-overriding: true
   zipkin:
