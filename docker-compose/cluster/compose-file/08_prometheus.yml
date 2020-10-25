@@ -22,8 +22,6 @@ services:
     networks:
       cluster-network:
         ipv4_address: ${IP_ADDR_PREFIX}.71
-    ports:
-      - 9090:9090
     extra_hosts:
       - consul-exporter.shit-code.com:${IP_ADDR_PREFIX}.72
       - consul.shit-code.com:${IP_ADDR_PREFIX}.10

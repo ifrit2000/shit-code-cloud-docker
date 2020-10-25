@@ -38,8 +38,6 @@ services:
     container_name: elasticsearch-1
     hostname: elasticsearch-1.shit-code.com
     image: ${ELASTICSEARCH_IMAGE}
-    ports:
-      - 9200:9200
     environment:
       - node.name=elasticsearch-1
       - discovery.seed_hosts=elasticsearch-2.shit-code.com,elasticsearch-3.shit-code.com
