@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  secure-1:
+    &secure
+    container_name: secure-1
+    image: ${SECURE_IMAGE}
+    hostname: secure-1.shit-code.com
+    environment:
+      - TZ=${TIME_ZONE}
+    restart: always
+    networks:
+      cluster-network:
+        ipv4_address: ${IP_ADDR_PREFIX}.121
+    extra_hosts:
+      - nginx.shit-code.com:${IP_ADDR_PREFIX}.9
+      - rabbit.shit-code.com:${IP_ADDR_PREFIX}.10
+      - consul-1.shit-code.com:${IP_ADDR_PREFIX}.11
+      - consul-2.shit-code.com:${IP_ADDR_PREFIX}.12
+      - consul-3.shit-code.com:${IP_ADDR_PREFIX}.13
+      - admin-1.shit-code.com:${IP_ADDR_PREFIX}.101
+      - admin-2.shit-code.com:${IP_ADDR_PREFIX}.102
+      - redis-1.shit-code.com:${IP_ADDR_PREFIX}.31
+      - redis-2.shit-code.com:${IP_ADDR_PREFIX}.32
+      - redis-3.shit-code.com:${IP_ADDR_PREFIX}.33
+      - redis-4.shit-code.com:${IP_ADDR_PREFIX}.34
+      - redis-5.shit-code.com:${IP_ADDR_PREFIX}.35
+      - redis-6.shit-code.com:${IP_ADDR_PREFIX}.36
+      - mysql-master.shit-code.com:${IP_ADDR_PREFIX}.21
+    volumes:
+      - ${DOCKER_VOLUME}/infrastructure/logs/secure:/app/log
+      - ${DOCKER_CONFIG}/apps:/app/config
+      - ${DOCKER_CONFIG}/consul/config.json:/consul/config/config.json
+      - ${DOCKER_CONFIG}/consul/client.json:/consul/config/client.json
+
