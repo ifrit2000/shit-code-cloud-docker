@@ -36,3 +36,4 @@ services:
         ipv4_address: ${IP_ADDR_PREFIX}.9
     volumes:
       - ${DOCKER_CONFIG}/logback/logback-spring.xml:/usr/share/nginx/html/logback-spring.xml
+      - ${DOCKER_CONFIG}/logback/logback-spring-dev.xml:/usr/share/nginx/html/logback-spring-dev.xml
