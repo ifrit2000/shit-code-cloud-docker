@@ -66,12 +66,8 @@
         <appender-ref ref="CONSOLE"/>
     </logger>
     <logger name="com.shit_code.cloud.gateway.dao.mapper" level="DEBUG"/>
-    <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="RABBIT_APPENDER"/>
-    </root>
 
-    <springProfile name="cluster">
+
         <property name="MAX_HISTORY" value="30"/>
         <property name="MAX_SIZE" value="256MB"/>
         <property name="FILE_LOG_PATTERN"
@@ -184,6 +180,5 @@
             <appender-ref ref="ERROR_FILE"/>
             <appender-ref ref="CONSOLE"/>
         </root>
-    </springProfile>
 
 </included>

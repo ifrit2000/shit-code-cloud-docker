@@ -4,7 +4,7 @@ services:
   secure-1:
     &secure
     container_name: secure-1
-    image: ${SECURE_IMAGE}
+    image: ${SECURITY_IMAGE}
     hostname: secure-1.shit-code.com
     environment:
       - TZ=${TIME_ZONE}
