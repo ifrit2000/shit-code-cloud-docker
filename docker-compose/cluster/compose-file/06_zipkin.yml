@@ -6,6 +6,7 @@ services:
     container_name: zipkin-1
     image: ${ZIPKIN_IMAGE}
     hostname: zipkin-1.shit-code.com
+    restart: always
     extra_hosts:
       - rabbit-1.shit-code.com:${IP_ADDR_PREFIX}.41
       - rabbit-2.shit-code.com:${IP_ADDR_PREFIX}.42

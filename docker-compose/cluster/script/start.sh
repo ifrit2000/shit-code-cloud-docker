@@ -17,5 +17,5 @@ up -d
 docker-compose \
 -f 00_network.yml \
 -f 10_admin.yml \
-#-f 11_gateway.yml \
+-f 11_gateway.yml \
 up -d
