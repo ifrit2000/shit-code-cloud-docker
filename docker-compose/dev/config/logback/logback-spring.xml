@@ -202,7 +202,7 @@
 
     <logger name="com.shit.code.cloud.mybatis.log.SqlLogInterceptor" level="DEBUG"/>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="ASYNC_RABBIT_APPENDER"/>
         <appender-ref ref="ASYNC_INFO_FILE"/>
         <appender-ref ref="ASYNC_DEBUG_FILE"/>
