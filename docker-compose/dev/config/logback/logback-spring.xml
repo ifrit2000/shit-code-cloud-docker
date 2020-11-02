@@ -47,7 +47,7 @@
     </appender>
 
     <property name="CONSOLE_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} [%-15.15thread] [%X{X-B3-TraceId:-}] %highlight(%-5level) %-64.64(%logger{32}#%method:%line) - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} [%-15.15thread] [%32.32(%X{X-B3-TraceId:-})] %highlight(%-5level) %-64.64(%logger{32}#%method:%line) - %msg%n"/>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
@@ -59,7 +59,7 @@
     <property name="MAX_HISTORY" value="30"/>
     <property name="MAX_SIZE" value="256MB"/>
     <property name="FILE_LOG_PATTERN"
-              value="%d{yyyy-MM-dd:HH:mm:ss.SSS,Asia/Shanghai} [%-15.15thread] %-5level %-40.40(%logger{32}) - %msg%n"/>
+              value="%d{yyyy-MM-dd:HH:mm:ss.SSS,Asia/Shanghai} [%-15.15thread] [%32.32(%X{X-B3-TraceId:-})] %-5level %-40.40(%logger{32}) - %msg%n"/>
 
     <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文件的路径及文件名 -->
