@@ -200,9 +200,9 @@
     </appender>
 
 
-    <logger name="com.shit.code.cloud.mybatis.log.SqlLogInterceptor" level="DEBUG"/>
+    <logger name="com.shit.code.cloud" level="DEBUG"/>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="ASYNC_RABBIT_APPENDER"/>
         <appender-ref ref="ASYNC_INFO_FILE"/>
         <appender-ref ref="ASYNC_DEBUG_FILE"/>
