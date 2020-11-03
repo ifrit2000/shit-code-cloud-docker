@@ -11,6 +11,7 @@
     <contextName>shit-code.${APP_NAME}</contextName>
 
     <conversionRule conversionWord="ipAddr" converterClass="com.shit.code.cloud.log.IpAddressConverter"/>
+    <!--    <conversionRule conversionWord="threadId" converterClass="com.shit.code.cloud.log.ThreadIdConverter"/>-->
     <appender name="RABBIT_APPENDER" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
         <layout>
             <pattern>
@@ -47,7 +48,7 @@
     </appender>
 
     <property name="CONSOLE_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} [%-15.15thread] [%32.32(%X{X-B3-TraceId:-})] %highlight(%-5level) %-64.64(%logger{32}#%method:%line) - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} [%-15.15thread] [%32.32(%X{X-B3-TraceId:-})] %highlight(%-5level) %-64.64(%logger{64}) - %msg%n"/>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
@@ -201,6 +202,7 @@
 
 
     <logger name="com.shit.code.cloud.mybatis.log.SqlLogInterceptor" level="DEBUG"/>
+    <logger name="com.shit.code.cloud" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="ASYNC_RABBIT_APPENDER"/>
