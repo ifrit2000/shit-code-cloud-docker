@@ -11,7 +11,7 @@
       {
         "level": "debug",
         "type": "rotating-file",
-        "path": "/var/log/git2consul/git2consul.log"
+        "path": "/var/lib/log/git2consul/git2consul.log"
       }
     ]
   },
