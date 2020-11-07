@@ -10,7 +10,7 @@
     <springProperty scope="context" name="RABBIT_PASSWORD" source="spring.rabbitmq.password"/>
     <contextName>shit-code.${APP_NAME}</contextName>
 
-    <conversionRule conversionWord="ipAddr" converterClass="com.shit.code.spring.log.convert.IpAddressConverter"/>
+    <conversionRule conversionWord="ipAddr" converterClass="com.shit.code.log.convert.IpAddressConverter"/>
     <appender name="RABBIT_APPENDER" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
         <layout>
             <pattern>
@@ -60,13 +60,10 @@
         <logger name="org.apache.shiro" level="DEBUG">
             <appender-ref ref="CONSOLE"/>
         </logger>
-        <logger name="com.shit.code.cloud.mybatis.log.SqlLogInterceptor" level="DEBUG">
+        <logger name="com.shit.code.mybatis.log.SqlLogInterceptor" level="DEBUG">
             <appender-ref ref="CONSOLE"/>
         </logger>
-        <logger name="com.shit_code.cloud.lib.springboot.database.sql" level="INFO">
-            <appender-ref ref="CONSOLE"/>
-        </logger>
-        <logger name="com.shit_code.cloud.gateway.dao.mapper" level="DEBUG"/>
+
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="RABBIT_APPENDER"/>
