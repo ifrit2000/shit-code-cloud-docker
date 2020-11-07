@@ -1,7 +1,4 @@
 spring:
-  cloud:
-    consul:
-      host: consul.shit-code.com
   rabbitmq:
     port: 5672
     username: guest
