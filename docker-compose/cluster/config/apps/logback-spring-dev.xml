@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+    <springProperty scope="context" name="LOG_PATH" source="logging.file.path"/>
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
+
+    <springProperty scope="context" name="RABBIT_HOST" source="spring.rabbitmq.addresses"/>
+    <springProperty scope="context" name="RABBIT_PORT" source="spring.rabbitmq.port"/>
+    <springProperty scope="context" name="RABBIT_USERNAME" source="spring.rabbitmq.username"/>
+    <springProperty scope="context" name="RABBIT_PASSWORD" source="spring.rabbitmq.password"/>
+    <contextName>shit-code.${APP_NAME}</contextName>
+
+    <conversionRule conversionWord="ipAddr" converterClass="com.shit.code.log.convert.IpAddressConverter"/>
+    <!--    <conversionRule conversionWord="threadId" converterClass="com.shit.code.cloud.log.ThreadIdConverter"/>-->
+    <appender name="RABBIT_APPENDER" class="org.springframework.amqp.rabbit.logback.AmqpAppender">
+        <layout>
+            <pattern>
+                {
+                "level": "%level",
+                "serviceName": "${APP_NAME:-}",
+                "traceId": "%X{X-B3-TraceId:-}",
+                "spanId": "%X{X-B3-SpanId:-}",
+                "logTime": "%d{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai}",
+                "parentSpanId": "%X{X-B3-ParentSpanId:-}",
+                "pid": "${PID:-}",
+                "thread": "%thread",
+                "class": "%logger",
+                "method": "%M",
+                "line": "%L",
+                "ip": "%ipAddr",
+                "message": "%message"
+                }
+            </pattern>
+        </layout>
+        <host>${RABBIT_HOST}</host>
+        <port>${RABBIT_PORT}</port>
+        <username>${RABBIT_USERNAME}</username>
+        <password>${RABBIT_PASSWORD}</password>
+
+        <declareExchange>true</declareExchange>
+        <exchangeType>topic</exchangeType>
+        <exchangeName>shit_code.log.exchange</exchangeName>
+        <routingKeyPattern>log.${APP_NAME}</routingKeyPattern>
+        <generateId>true</generateId>
+        <charset>UTF-8</charset>
+        <durable>false</durable>
+        <deliveryMode>NON_PERSISTENT</deliveryMode>
+    </appender>
+
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} [%-15.15thread] [%32.32(%X{X-B3-TraceId:-})] %highlight(%-5level) %-64.64(%logger{64}) - %msg%n"/>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+
+    <property name="MAX_HISTORY" value="30"/>
+    <property name="MAX_SIZE" value="256MB"/>
+    <property name="FILE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd:HH:mm:ss.SSS,Asia/Shanghai} [%-15.15thread] [%32.32(%X{X-B3-TraceId:-})] %-5level %-40.40(%logger{32}) - %msg%n"/>
+
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LOG_PATH}/info.log</file>
+        <!--日志文件输出格式-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset> <!-- 设置字符集 -->
+        </encoder>
+        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 日志归档 -->
+            <fileNamePattern>${LOG_PATH}/info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${MAX_SIZE}</maxFileSize>
+            <!--日志文件保留天数-->
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <!-- 此日志文件只记录info级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/debug.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/debug-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${MAX_SIZE}</maxFileSize>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/warn.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${MAX_SIZE}</maxFileSize>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/error.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${MAX_SIZE}</maxFileSize>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="ASYNC_INFO_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>128</queueSize>
+        <discardingThreshold>5</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <maxFlushTime>300</maxFlushTime>
+        <neverBlock>false</neverBlock>
+        <appender-ref ref="INFO_FILE"/>
+    </appender>
+
+    <appender name="ASYNC_DEBUG_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>128</queueSize>
+        <discardingThreshold>5</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <maxFlushTime>300</maxFlushTime>
+        <neverBlock>false</neverBlock>
+        <appender-ref ref="DEBUG_FILE"/>
+    </appender>
+
+    <appender name="ASYNC_WARN_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>128</queueSize>
+        <discardingThreshold>5</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <maxFlushTime>300</maxFlushTime>
+        <neverBlock>false</neverBlock>
+        <appender-ref ref="WARN_FILE"/>
+    </appender>
+
+    <appender name="ASYNC_ERROR_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>128</queueSize>
+        <discardingThreshold>5</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <maxFlushTime>300</maxFlushTime>
+        <neverBlock>false</neverBlock>
+        <appender-ref ref="ERROR_FILE"/>
+    </appender>
+
+    <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>128</queueSize>
+        <discardingThreshold>5</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <maxFlushTime>300</maxFlushTime>
+        <neverBlock>false</neverBlock>
+        <appender-ref ref="CONSOLE"/>
+    </appender>
+
+    <appender name="ASYNC_RABBIT_APPENDER" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>128</queueSize>
+        <discardingThreshold>5</discardingThreshold>
+        <includeCallerData>false</includeCallerData>
+        <maxFlushTime>300</maxFlushTime>
+        <neverBlock>false</neverBlock>
+        <appender-ref ref="RABBIT_APPENDER"/>
+    </appender>
+
+
+    <logger name="com.shit.code.mybatis.log.SqlLogInterceptor" level="DEBUG"/>
+    <logger name="com.shit.code" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_RABBIT_APPENDER"/>
+        <appender-ref ref="ASYNC_INFO_FILE"/>
+        <appender-ref ref="ASYNC_DEBUG_FILE"/>
+        <appender-ref ref="ASYNC_WARN_FILE"/>
+        <appender-ref ref="ASYNC_ERROR_FILE"/>
+        <appender-ref ref="ASYNC_CONSOLE"/>
+    </root>
+
+</included>

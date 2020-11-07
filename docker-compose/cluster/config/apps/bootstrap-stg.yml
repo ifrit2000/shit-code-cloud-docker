@@ -1,12 +1,12 @@
 spring:
   cloud:
     consul:
-      host: 172.28.0.11
+      host: consul.shit-code.com
   rabbitmq:
     port: 5672
     username: guest
     password: guest
-    addresses: 172.28.0.41
+    addresses: rabbit.shit-code.com
   #  security:
   #    user:
   #      name: admin
@@ -14,11 +14,6 @@ spring:
   output:
     ansi:
       enabled: always
-
-logging:
-  config: classpath:config/logback-spring.xml
-  file:
-    path: /app/log
 
 shit:
   code:
@@ -36,3 +31,8 @@ shit:
         request-mapping:
           enable: true
           level: INFO
+
+logging:
+  config: classpath:config/logback-spring.xml
+  file:
+    path: /tmp/log

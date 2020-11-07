@@ -1,9 +1,0 @@
-spring:
-  boot:
-    admin:
-      client:
-        auto-deregistration: true
-        instance:
-          prefer-ip: true
-          service-base-url: http://${spring.cloud.client.ip-address}:${server.port}
-          management-base-url: http://${spring.cloud.client.ip-address}:${server.port}
