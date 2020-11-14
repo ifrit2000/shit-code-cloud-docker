@@ -29,6 +29,7 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'consul'
+    metrics_path: /actuator/prometheus
     consul_sd_configs:
       - server: 'consul.shit-code.com:8500'
         services: []
@@ -46,14 +47,14 @@ scrape_configs:
         regex: .*test.*
         action: keep
 
-  - job_name: 'redis'
-    consul_sd_configs:
-      - server: 'consul.shit-code.com:8500'
-        services: []
-    relabel_configs:
-      - source_labels: [__meta_consul_tags]
-        regex: .*test.*
-        action: keep
+#  - job_name: 'redis'
+#    consul_sd_configs:
+#      - server: 'consul.shit-code.com:8500'
+#        services: []
+#    relabel_configs:
+#      - source_labels: [__meta_consul_tags]
+#        regex: .*test.*
+#        action: keep
 
   ## config for the multiple Redis targets that the exporter will scrape
   - job_name: 'redis_exporter_targets'
