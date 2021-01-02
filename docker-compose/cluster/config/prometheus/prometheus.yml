@@ -1,13 +1,13 @@
 # my global config
 global:
-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
     # scrape_timeout is set to the global default (10s).
 
     # Alertmanager configuration
     #alerting:
     #  alertmanagers:
-    #    - static_configs:
+  #    - static_configs:
   #        - targets:
   # - alertmanager:9093
 
@@ -26,35 +26,36 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: [ 'localhost:9090' ]
 
+# spring  boot 模板 4701
   - job_name: 'consul'
     metrics_path: /actuator/prometheus
     consul_sd_configs:
       - server: 'consul.shit-code.com:8500'
-        services: []
-#      - server: '172.28.2.11:8500'
-#        services: []
-#      - server: '172.28.2.12:8500'
-#        services: []
-#      - server: '172.28.2.13:8500'
-#        services: []
+        services: [ ]
+      #      - server: '172.28.2.11:8500'
+      #        services: []
+      #      - server: '172.28.2.12:8500'
+      #        services: []
+      #      - server: '172.28.2.13:8500'
+      #        services: []
       # https://blog.csdn.net/aixiaoyang168/article/details/103022342
       #https://prometheus.io/docs/prometheus/latest/configuration/configuration/#consul_sd_config
       #通过标签过滤consul中的服务
     relabel_configs:
-      - source_labels: [__meta_consul_tags]
+      - source_labels: [ __meta_consul_tags ]
         regex: .*test.*
         action: keep
 
-#  - job_name: 'redis'
-#    consul_sd_configs:
-#      - server: 'consul.shit-code.com:8500'
-#        services: []
-#    relabel_configs:
-#      - source_labels: [__meta_consul_tags]
-#        regex: .*test.*
-#        action: keep
+  #  - job_name: 'redis'
+  #    consul_sd_configs:
+  #      - server: 'consul.shit-code.com:8500'
+  #        services: []
+  #    relabel_configs:
+  #      - source_labels: [__meta_consul_tags]
+  #        regex: .*test.*
+  #        action: keep
 
   ## config for the multiple Redis targets that the exporter will scrape
   - job_name: 'redis_exporter_targets'
@@ -68,16 +69,47 @@ scrape_configs:
           - redis://redis-6.shit-code.com:6379
     metrics_path: /scrape
     relabel_configs:
-      - source_labels: [__address__]
+      - source_labels: [ __address__ ]
         target_label: __param_target
-      - source_labels: [__param_target]
+      - source_labels: [ __param_target ]
         target_label: instance
       - target_label: __address__
         #export 实际抓取请求会到export上,上面配置的target会变成请求参数
         replacement: redis-exporter.shit-code.com:9121
 
   ## config for scraping the exporter itself
-#  - job_name: 'redis_exporter'
-#    static_configs:
-#      - targets:
-#          - redis-exporter.shit-code.com:9121
+  #  - job_name: 'redis_exporter'
+  #    static_configs:
+  #      - targets:
+  #          - redis-exporter.shit-code.com:9121
+
+
+# zipkin模板1598
+  - job_name: 'zipkin'
+    scrape_interval: 5s
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets: [ '172.28.2.51:9411' ]
+    metric_relabel_configs:
+      # Response code count
+      - source_labels: [ __name__ ]
+        regex: '^status_(\d+)_(.*)$'
+        replacement: '${1}'
+        target_label: status
+      - source_labels: [ __name__ ]
+        regex: '^status_(\d+)_(.*)$'
+        replacement: '${2}'
+        target_label: path
+      - source_labels: [ __name__ ]
+        regex: '^status_(\d+)_(.*)$'
+        replacement: 'http_requests_total'
+        target_label: __name__
+      # Response time, pending histogram from https://github.com/openzipkin/zipkin/pull/1609
+      - source_labels: [ __name__ ]
+        regex: '^response_(.*)$'
+        replacement: '${1}'
+        target_label: path
+      - source_labels: [ __name__ ]
+        regex: '^response_(.*)$'
+        replacement: 'http_request_duration_milliseconds'
+        target_label: __name__

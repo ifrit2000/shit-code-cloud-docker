@@ -7,6 +7,8 @@ services:
     hostname: grafana.shit-code.com
     environment:
       - TZ=${TIME_ZONE}
+      # grafana直连redis 模板12776
+      - GF_INSTALL_PLUGINS=redis-datasource
     extra_hosts:
       - prometheus.shit-code.com:${IP_ADDR_PREFIX}.71
     ports:
