@@ -83,8 +83,8 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
   zipkin:
     depends_on:
-      - mysql
-      - rabbit
+      - kafka
+#      - rabbit
     container_name: zipkin
     image: ${ZIPKIN_IMAGE}
     hostname: zipkin.shit-code.com
