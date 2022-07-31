@@ -97,13 +97,17 @@ services:
       - mysql.shit-code.com:${IP_ADDR_PREFIX}.21
       - rabbit.shit-code.com:${IP_ADDR_PREFIX}.41
     environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka.shit-code.com:9092
+      - KAFKA_TOPIC=zipkin
+      - KAFKA_GROUP_ID=zipkin
+      - KAFKA_STREAMS=1
 #      - STORAGE_TYPE=mysql
 #      - MYSQL_HOST=mysql.shit-code.com
 #      - MYSQL_USER=root
 #      - MYSQL_PASS=123456
-      - RABBIT_ADDRESSES=rabbit.shit-code.com:5672
-      - RABBIT_USER=guest
-      - RABBIT_PASSWORD=guest
+#      - RABBIT_ADDRESSES=rabbit.shit-code.com:5672
+#      - RABBIT_USER=guest
+#      - RABBIT_PASSWORD=guest
 #      - JAVA_OPTS=-Dlogging.level.zipkin2=DEBUG
     restart: always
     #https://raw.githubusercontent.com/openzipkin/zipkin/master/zipkin-storage/mysql-v1/src/main/resources/mysql.sql
