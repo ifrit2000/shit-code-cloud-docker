@@ -102,7 +102,7 @@ services:
       - KAFKA_BOOTSTRAP_SERVERS=kafka.shit-code.com:9092
       - KAFKA_TOPIC=zipkin
       - KAFKA_GROUP_ID=zipkin
-      - KAFKA_STREAMS="1"
+      - KAFKA_STREAMS=1
 #      - STORAGE_TYPE=mysql
 #      - MYSQL_HOST=mysql.shit-code.com
 #      - MYSQL_USER=root
