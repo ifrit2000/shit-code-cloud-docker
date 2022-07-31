@@ -95,13 +95,14 @@ services:
       dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.51
     extra_hosts:
-      - mysql.shit-code.com:${IP_ADDR_PREFIX}.21
-      - rabbit.shit-code.com:${IP_ADDR_PREFIX}.41
+      - kafka.shit-code.com:${IP_ADDR_PREFIX}.81
+#      - mysql.shit-code.com:${IP_ADDR_PREFIX}.21
+#      - rabbit.shit-code.com:${IP_ADDR_PREFIX}.41
     environment:
       - KAFKA_BOOTSTRAP_SERVERS=kafka.shit-code.com:9092
       - KAFKA_TOPIC=zipkin
       - KAFKA_GROUP_ID=zipkin
-#      - KAFKA_STREAMS=1
+      - KAFKA_STREAMS="1"
 #      - STORAGE_TYPE=mysql
 #      - MYSQL_HOST=mysql.shit-code.com
 #      - MYSQL_USER=root
