@@ -15,7 +15,7 @@ services:
     image: ${CONSUL_IMAGE}
     hostname: consul.shit-code.com
     ports:
-      - 8500:8500
+      - "8500:8500"
     networks:
       dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.11
@@ -32,7 +32,7 @@ services:
       dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.21
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     volumes:
@@ -46,7 +46,7 @@ services:
       dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.31
     ports:
-      - 6379:6379
+      - "6379:6379"
     volumes:
       - ${DOCKER_VOLUME}/redis:/data
       - ${DOCKER_CONFIG}/redis/redis.conf:/usr/local/etc/redis/redis.conf
@@ -55,8 +55,8 @@ services:
     image: ${RABBITMQ_IMAGE}
     hostname: rabbit.shit-code.com
     ports:
-      - 5672:5672
-      - 15672:15672
+      - "5672:5672"
+      - "15672:15672"
     networks:
       dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.41
@@ -119,7 +119,7 @@ services:
     image: ${NGINX_IMAGE}
     hostname: nginx.shit-code.com
     ports:
-      - 80:80
+      - "80:80"
     networks:
       dev-network:
         ipv4_address: ${IP_ADDR_PREFIX}.61
